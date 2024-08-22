@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
-class BottomAppBarWithContainers extends StatefulWidget {
-  const BottomAppBarWithContainers({super.key});
+class CustomBottomAppBarWithContainers extends StatefulWidget {
+  const CustomBottomAppBarWithContainers({super.key});
 
   @override
-  State<BottomAppBarWithContainers> createState() =>
+  State<CustomBottomAppBarWithContainers> createState() =>
       _CustomBottomNavWithContainerState();
 }
 
 class _CustomBottomNavWithContainerState
-    extends State<BottomAppBarWithContainers> {
+    extends State<CustomBottomAppBarWithContainers> {
   int _currentIndex = 0;
   void checkItem(index) {
     setState(() {

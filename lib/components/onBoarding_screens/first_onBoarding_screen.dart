@@ -1,0 +1,264 @@
+import 'package:flutter/material.dart';
+
+class FirstOnBoardingScreen extends StatefulWidget {
+  @override
+  State<FirstOnBoardingScreen> createState() => _FirstOnBoardingScreenState();
+}
+
+class _FirstOnBoardingScreenState extends State<FirstOnBoardingScreen> {
+  int _currentIndex = 0;
+  final PageController pageController = PageController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Center(
+        child: Column(
+          children: [
+            Spacer(),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: SizedBox(
+                  width: 130,
+                  height: 65,
+                  child: Image.asset(
+                    'assets/onBoardLogo.png',
+                    fit: BoxFit.cover,
+                  )),
+            ),
+            _space(15, 0),
+            SizedBox(
+              width: 275,
+              height: 305,
+              child: Image.asset(
+                'assets/onBoardImage.png',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Spacer(),
+            _onBoarding(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _onBoarding(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      width: MediaQuery.of(context).size.width,
+      height: 300,
+      decoration: const BoxDecoration(
+        color: Color(0xFF326DDF),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(100),
+        ),
+      ),
+      child: Stack(
+        children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: PageView.builder(
+              controller: pageController,
+              itemCount: pageViewItem.length,
+              itemBuilder: (context, index) {
+                return pageViewItem[index];
+              },
+              onPageChanged: (value) {
+                setState(() {
+                  _currentIndex = value;
+                });
+              },
+            ),
+          ),
+          _space(20, 0),
+          Positioned(
+            left: MediaQuery.of(context).size.width * 0.1,
+            top: MediaQuery.of(context).size.height * 0.3,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(seconds: 1),
+                      transform: _currentIndex == 0
+                          ? Matrix4.rotationY(10)
+                          : Matrix4.rotationY(0),
+                      transformAlignment: Alignment.centerRight,
+                      child: Container(
+                        margin: const EdgeInsets.all(3),
+                        width: _currentIndex == 0 ? 32 : 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      transform: _currentIndex == 1
+                          ? Matrix4.rotationY(10)
+                          : Matrix4.rotationY(0),
+                      transformAlignment: Alignment.centerRight,
+                      child: Container(
+                        margin: const EdgeInsets.all(3),
+                        width: _currentIndex == 1 ? 32 : 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: Duration(seconds: 1),
+                      transform: _currentIndex == 2
+                          ? Matrix4.rotationY(10)
+                          : Matrix4.rotationY(0),
+                      transformAlignment: Alignment.centerRight,
+                      child: Container(
+                        margin: const EdgeInsets.all(3),
+                        width: _currentIndex == 2 ? 32 : 12,
+                        height: 12,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                _space(0, 155),
+                GestureDetector(
+                  onTap: () {
+                    pageController.nextPage(
+                        duration: Duration(seconds: 1),
+                        curve: Curves.easeOutBack);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_forward_ios,
+                      color: Color(0xFF326DDF),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _space(double height, double width) {
+    return SizedBox(
+      height: height,
+      width: width,
+    );
+  }
+
+  List<Column> pageViewItem = [
+    const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 290,
+          child: Text(
+            'Earn More Money',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 22,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.start,
+          ),
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        SizedBox(
+          width: 290,
+          child: Text(
+            'Trade smarter with [App Name] and see your profits soar.Get started now and take control of your financial future!',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    ),
+    const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 290,
+          child: Text(
+            'Do trade in just Taps',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 22,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        SizedBox(
+          width: 290,
+          child: Text(
+            'Effortlessly manage your investments with [App Name]. Start now and simplify your trading journey!',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    ),
+    const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 290,
+          child: Text(
+            'Learn by trading Demo',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 22,
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 3,
+        ),
+        SizedBox(
+          width: 290,
+          child: Text(
+            'Practice strategies and refine your skills risk-free. Start today and build confidence before you trade live!',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 14,
+              color: Colors.white,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    ),
+  ];
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_components/components/Account/password_authenticator_field.dart';
 import 'package:flutter_components/components/account_component_page.dart';
+import 'package:flutter_components/components/onBoarding_screens.dart';
 import 'package:flutter_components/main_button.dart';
 
 import 'components/bottom_app_component_page.dart';
@@ -19,6 +20,17 @@ class MainHomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const BottomAppComponentPage(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'On Boarding Screens',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const OnBoardingScreens(),
             ),
           );
         },

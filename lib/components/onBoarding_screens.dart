@@ -1,30 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_components/components/Bottom_App_Bars/custom_bottom_app_bar_with_container.dart';
+import 'package:flutter_components/components/onBoarding_screens/first_onBoarding_screen.dart';
 import 'package:flutter_components/main_button.dart';
 
-class BottomAppComponentPage extends StatelessWidget {
-  const BottomAppComponentPage({super.key});
+class OnBoardingScreens extends StatelessWidget {
+  const OnBoardingScreens({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // list
     List<MainButton> but = [
       MainButton(
-          data: 'Bottom App Bar with Container',
+          data: 'First OnBoarding Screen',
           onPress: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => CustomBottomAppBarWithContainers(),
+                builder: (context) => FirstOnBoardingScreen(),
               ),
             );
-          })
+          }),
     ];
-
-    // main code
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Bottom App Bar'),
+        title: const Text('On Boarding Screens'),
         centerTitle: true,
       ),
       body: ListView.builder(
