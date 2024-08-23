@@ -1,6 +1,9 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter_components/components/Account/password_authenticator_field.dart';
 import 'package:flutter_components/components/account_component_page.dart';
+import 'package:flutter_components/components/different_navigators.dart';
 import 'package:flutter_components/components/onBoarding_screens.dart';
 import 'package:flutter_components/main_button.dart';
 
@@ -31,6 +34,17 @@ class MainHomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => const OnBoardingScreens(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Navigators',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const DifferentNavigator(),
             ),
           );
         },
