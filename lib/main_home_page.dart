@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/components/Account/password_authenticator_field.dart';
 import 'package:flutter_components/components/account_component_page.dart';
 import 'package:flutter_components/components/different_navigators.dart';
+import 'package:flutter_components/components/expandable_card.dart';
 import 'package:flutter_components/components/onBoarding_screens.dart';
 import 'package:flutter_components/main_button.dart';
-
-import 'components/bottom_app_component_page.dart';
 
 class MainHomePage extends StatelessWidget {
   const MainHomePage({super.key});
@@ -17,23 +16,23 @@ class MainHomePage extends StatelessWidget {
     // list of buttons
     List<MainButton> button = [
       MainButton(
-        data: 'Bottom App Bar',
-        onPress: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BottomAppComponentPage(),
-            ),
-          );
-        },
-      ),
-      MainButton(
         data: 'On Boarding Screens',
         onPress: () {
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => const OnBoardingScreens(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Expanded Card',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ExpandableCard(),
             ),
           );
         },

@@ -66,6 +66,10 @@ flutter:
     - assets/onBoardLogo.png
     - assets/onBoardImage.png
     - assets/Logo.png
+    - assets/linkedin.png
+    - assets/github.png
+    - assets/insta.png
+    - assets/dev.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
