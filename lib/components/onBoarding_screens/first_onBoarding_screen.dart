@@ -158,20 +158,6 @@ class _FirstOnBoardingScreenState extends State<FirstOnBoardingScreen> {
     );
   }
 
-  Widget _text(String text, FontWeight weight, double size) {
-    return SizedBox(
-      width: 290,
-      child: Text(
-        '$text',
-        style: TextStyle(
-          fontWeight: weight,
-          color: Colors.white,
-          fontSize: size,
-        ),
-      ),
-    );
-  }
-
   List<Widget> get pageViewItem {
     return [
       Column(
@@ -208,6 +194,20 @@ class _FirstOnBoardingScreenState extends State<FirstOnBoardingScreen> {
         ],
       ),
     ];
+  }
+
+  Widget _text(String text, FontWeight weight, double size) {
+    return SizedBox(
+      width: 290,
+      child: Text(
+        '$text',
+        style: TextStyle(
+          fontWeight: weight,
+          color: Colors.white,
+          fontSize: size,
+        ),
+      ),
+    );
   }
 
   Widget _space(double height, double width) {
