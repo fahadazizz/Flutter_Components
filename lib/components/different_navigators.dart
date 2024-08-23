@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/components/Navigators/custom_tab_controller.dart';
 import 'package:flutter_components/main_button.dart';
 
+import 'Navigators/first_contained_bottom_navigation_bar.dart';
+
 class DifferentNavigator extends StatelessWidget {
   const DifferentNavigator({super.key});
 
@@ -16,6 +18,17 @@ class DifferentNavigator extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => CustomTabController(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'First Contained BottomNav',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => FirstContainedBottomNavigationBar(),
             ),
           );
         },
