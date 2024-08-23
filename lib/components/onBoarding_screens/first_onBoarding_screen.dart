@@ -158,107 +158,62 @@ class _FirstOnBoardingScreenState extends State<FirstOnBoardingScreen> {
     );
   }
 
+  Widget _text(String text, FontWeight weight, double size) {
+    return SizedBox(
+      width: 290,
+      child: Text(
+        '$text',
+        style: TextStyle(
+          fontWeight: weight,
+          color: Colors.white,
+          fontSize: size,
+        ),
+      ),
+    );
+  }
+
+  List<Widget> get pageViewItem {
+    return [
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _text('Earn More Money', FontWeight.bold, 22),
+          _space(3, 0),
+          _text(
+              'Trade smarter with [App Name] and see your profits soar.Get started now and take control of your financial future!',
+              FontWeight.normal,
+              14),
+        ],
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _text('Do trade in just Taps', FontWeight.bold, 22),
+          _space(3, 0),
+          _text(
+              'Effortlessly manage your investments with [App Name]. Start now and simplify your trading journey!',
+              FontWeight.normal,
+              14),
+        ],
+      ),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _text('Learn by trading Demo', FontWeight.bold, 22),
+          _space(3, 0),
+          _text(
+              'Practice strategies and refine your skills risk-free. Start today and build confidence before you trade live!',
+              FontWeight.normal,
+              14),
+        ],
+      ),
+    ];
+  }
+
   Widget _space(double height, double width) {
     return SizedBox(
       height: height,
       width: width,
     );
   }
-
-  List<Column> pageViewItem = [
-    const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 290,
-          child: Text(
-            'Earn More Money',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 22,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.start,
-          ),
-        ),
-        SizedBox(
-          height: 3,
-        ),
-        SizedBox(
-          width: 290,
-          child: Text(
-            'Trade smarter with [App Name] and see your profits soar.Get started now and take control of your financial future!',
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    ),
-    const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 290,
-          child: Text(
-            'Do trade in just Taps',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 22,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 3,
-        ),
-        SizedBox(
-          width: 290,
-          child: Text(
-            'Effortlessly manage your investments with [App Name]. Start now and simplify your trading journey!',
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    ),
-    const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        SizedBox(
-          width: 290,
-          child: Text(
-            'Learn by trading Demo',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              fontSize: 22,
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 3,
-        ),
-        SizedBox(
-          width: 290,
-          child: Text(
-            'Practice strategies and refine your skills risk-free. Start today and build confidence before you trade live!',
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ],
-    ),
-  ];
 }
