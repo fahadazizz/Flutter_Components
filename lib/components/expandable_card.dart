@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ExpandableCard extends StatefulWidget {
-  ExpandableCard({super.key});
+  const ExpandableCard({super.key});
 
   @override
   State<ExpandableCard> createState() => _ExpandableCardState();
@@ -9,175 +9,210 @@ class ExpandableCard extends StatefulWidget {
 
 class _ExpandableCardState extends State<ExpandableCard>
     with SingleTickerProviderStateMixin {
+  // animation controller
   late AnimationController _animationController;
   late Animation<double> _heightAnimation;
-  late Animation<double> _opacityAnimation;
+  late Animation<double> _opactityAnimation;
 
-  bool seeFull = false;
+  // component content
   final String userName = 'Fahad Aziz';
-  final String passion = 'App Development';
+  final String passion = 'App Developer';
   final Image insta = Image.asset('assets/insta.png');
   final Image github = Image.asset('assets/github.png');
   final Image linkedin = Image.asset('assets/linkedin.png');
   final Image dev = Image.asset('assets/dev.png', fit: BoxFit.contain);
 
+  // components color
+  Color borderColor = Color(0xff8274FF);
+  Color mainColor = Colors.white;
+
+  bool isFull = false;
+
   @override
   void initState() {
-    super.initState();
+    // TODO: implement initState
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 500),
     );
 
-    _heightAnimation = Tween<double>(begin: 55, end: 430).animate(
+    _heightAnimation = Tween<double>(begin: 80, end: 430).animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
+
+    _opactityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
-
-    _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
+    super.initState();
   }
 
   void _toggleCard() {
     setState(() {
-      if (seeFull) {
+      if (isFull) {
         _animationController.reverse();
       } else {
         _animationController.forward();
       }
-      seeFull = !seeFull;
+
+      isFull = !isFull;
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    // Replace Flexible with Expanded in your code
     return Scaffold(
-      backgroundColor: Color(0xffebe9ff),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30),
-        child: Center(
-          child: AnimatedBuilder(
+      body: Align(
+        alignment: Alignment.center,
+        child: AnimatedBuilder(
             animation: _animationController,
             builder: (context, child) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0xff8274FF).withOpacity(0.7),
-                      offset: Offset(0, 4),
-                      blurRadius: 14,
-                    ),
-                  ],
-                ),
-                height: _heightAnimation.value,
-                child: Column(
-                  children: [
-                    if (seeFull) ...[
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      ClipRRect(
-                        child: dev,
-                        borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(8)),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Expanded(
+              return isFull
+                  // if full
+                  ? Expanded(
+                      child: Container(
+                        height: _heightAnimation.value,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                          color: borderColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                         child: FadeTransition(
-                          opacity: _opacityAnimation,
-                          child: Padding(
-                            padding: EdgeInsets.all(12),
-                            child: Column(
-                              children: [
-                                Row(
+                          opacity: _opactityAnimation,
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerRight,
+                                child: IconButton(
+                                    onPressed: _toggleCard,
+                                    icon: Icon(
+                                      Icons.keyboard_arrow_up,
+                                      size: 24,
+                                      color: mainColor,
+                                    )),
+                              ),
+                              SizedBox(
+                                height: 200,
+                                child: ClipRRect(
+                                  child: Image.asset('assets/dev.png'),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.all(12),
+                                child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      userName,
+                                      '$userName',
                                       style: TextStyle(
+                                        color: mainColor,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold,
-                                        color: Color(0xff8274FF),
                                       ),
                                     ),
                                     Text(
-                                      passion,
+                                      '$passion',
                                       style: TextStyle(
-                                        fontSize: 13,
+                                        color: mainColor,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.normal,
-                                        color: Color(0xff8274FF),
                                       ),
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 18),
-                                _rowItem(
-                                    linkedin, 'https://linkedin/fahad-aziz'),
-                                _rowItem(github, 'https://github/fahad-aziz'),
-                                _rowItem(insta, 'https://instagram/fahad-aziz'),
-                              ],
-                            ),
+                              ),
+                              _rowItem(Image.asset('assets/linkedin.png'),
+                                  'https://www.linkedin.com/in/fahad-aziz-khan-2a1723261/'),
+                              _rowItem(Image.asset('assets/github.png'),
+                                  'https://github.com/fahadazizz'),
+                              _rowItem(Image.asset('assets/insta.png'),
+                                  'https://instagram.com/fahadazizz'),
+                            ],
                           ),
                         ),
                       ),
-                    ] else ...[
-                      Padding(
-                        padding: EdgeInsets.only(left: 12, right: 12, top: 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              userName,
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xff8274FF),
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: _toggleCard,
-                              icon: Icon(
-                                Icons.keyboard_arrow_down,
-                                size: 32,
-                                color: Color(0xff8274FF),
-                              ),
-                            ),
-                          ],
-                        ),
+                    )
+
+                  // if not full
+                  : Container(
+                      height: _heightAnimation.value,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      decoration: BoxDecoration(
+                        color: borderColor,
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                    ],
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 55,
+                            height: 55,
+                            child: ClipRRect(
+                              child: Image.asset(
+                                'assets/dev.png',
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          ),
+                          _space(10, 0),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '$userName',
+                                style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                '$passion',
+                                style: TextStyle(
+                                  color: mainColor,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                          _space(80, 0),
+                          IconButton(
+                            onPressed: _toggleCard,
+                            icon: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              size: 24,
+                              color: mainColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+            }),
       ),
+    );
+  }
+
+  Widget _space(double width, double height) {
+    return SizedBox(
+      width: width,
+      height: height,
     );
   }
 
   Widget _rowItem(Image icon, String url) {
     return Padding(
-      padding: EdgeInsets.all(3),
+      padding: EdgeInsets.only(left: 12, right: 12, top: 6),
       child: Row(
         children: [
           SizedBox(width: 24, height: 24, child: icon),
           const SizedBox(width: 3),
-          Text(
-            url,
-            style: TextStyle(
-                color: Color(0xff8274FF), fontWeight: FontWeight.w500),
+          Flexible(
+            flex: 1,
+            child: Text(
+              url,
+              style: TextStyle(color: mainColor, fontWeight: FontWeight.w500),
+            ),
           ),
         ],
       ),

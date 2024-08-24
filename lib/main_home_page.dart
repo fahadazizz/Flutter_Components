@@ -1,12 +1,13 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
-import 'package:flutter_components/components/Account/password_authenticator_field.dart';
-import 'package:flutter_components/components/account_component_page.dart';
-import 'package:flutter_components/components/different_navigators.dart';
+import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
+import 'package:flutter_components/components/first_onBoarding_screen.dart';
+import 'package:flutter_components/components/password_authenticator_field.dart';
 import 'package:flutter_components/components/expandable_card.dart';
-import 'package:flutter_components/components/onBoarding_screens.dart';
 import 'package:flutter_components/main_button.dart';
+
+import 'components/custom_tab_controller.dart';
 
 class MainHomePage extends StatelessWidget {
   const MainHomePage({super.key});
@@ -16,12 +17,12 @@ class MainHomePage extends StatelessWidget {
     // list of buttons
     List<MainButton> button = [
       MainButton(
-        data: 'On Boarding Screens',
+        data: 'Custom Tab Controller',
         onPress: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const OnBoardingScreens(),
+              builder: (context) => CustomTabController(),
             ),
           );
         },
@@ -38,23 +39,34 @@ class MainHomePage extends StatelessWidget {
         },
       ),
       MainButton(
-        data: 'Navigators',
+        data: 'Contained bottom Nav',
         onPress: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const DifferentNavigator(),
+              builder: (context) => const FirstContainedBottomNavigationBar(),
             ),
           );
         },
       ),
       MainButton(
-        data: 'Account',
+        data: 'First OnBoarding Screen',
         onPress: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AccountComponentPage(),
+              builder: (context) => FirstOnBoardingScreen(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Password Authenticator Field',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PasswordAuthenticatorField(),
             ),
           );
         },

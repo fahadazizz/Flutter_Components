@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_components/components/Navigators/first_contained_bottom_navigation_bar.dart';
+import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/main_home_page.dart';
 import 'package:provider/provider.dart';
 
