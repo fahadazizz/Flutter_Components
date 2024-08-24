@@ -86,7 +86,7 @@ class _FirstContainedBottomNavigationBarState
         containedProvider.setIndex(thisIndex);
       },
       child: Container(
-        width: containedProvider.currentIndex == thisIndex ? 75 : 30,
+        width: containedProvider.currentIndex == thisIndex ? 75 : 35,
         height: 40,
         padding: const EdgeInsets.all(3),
         decoration: BoxDecoration(
