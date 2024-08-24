@@ -30,13 +30,12 @@ class _ExpandableCardState extends State<ExpandableCard>
 
   @override
   void initState() {
-    // TODO: implement initState
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 500),
     );
 
-    _heightAnimation = Tween<double>(begin: 80, end: 430).animate(
+    _heightAnimation = Tween<double>(begin: 70, end: 430).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeInOut));
 
     _opactityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
@@ -55,6 +54,12 @@ class _ExpandableCardState extends State<ExpandableCard>
 
       isFull = !isFull;
     });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose;
+    super.dispose();
   }
 
   @override
