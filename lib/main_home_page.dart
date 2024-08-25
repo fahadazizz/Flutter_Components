@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_components/components/custom_shimmer_effect.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/first_onBoarding_screen.dart';
 import 'package:flutter_components/components/password_authenticator_field.dart';
@@ -71,12 +72,23 @@ class MainHomePage extends StatelessWidget {
           );
         },
       ),
+      MainButton(
+        data: 'Custom shimmer effect',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomShimmerEffect(),
+            ),
+          );
+        },
+      ),
     ];
 
     // main code
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home Page'),
+        title: const Text('Main Component Page'),
         centerTitle: true,
       ),
       body: Padding(
