@@ -1,14 +1,17 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 
-class CustomProgressIndicator extends StatefulWidget {
+class CustomCircularProgressIndicator extends StatefulWidget {
   double progressValue;
-  CustomProgressIndicator({required this.progressValue});
+  CustomCircularProgressIndicator({required this.progressValue});
   @override
-  State<CustomProgressIndicator> createState() =>
-      _CustomProgressIndicatorState();
+  State<CustomCircularProgressIndicator> createState() =>
+      _CustomCircularProgressIndicatorState();
 }
 
-class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
+class _CustomCircularProgressIndicatorState
+    extends State<CustomCircularProgressIndicator>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
@@ -27,6 +30,13 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
