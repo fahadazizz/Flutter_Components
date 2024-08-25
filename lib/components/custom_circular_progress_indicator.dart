@@ -1,5 +1,7 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class CustomCircularProgressIndicator extends StatefulWidget {
@@ -14,19 +16,37 @@ class _CustomCircularProgressIndicatorState
     extends State<CustomCircularProgressIndicator>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
+
   late Animation<double> _animation;
+  late Animation<Color?> _colorAnimation;
+
   bool isClicked = false;
+
+  List<Color> _colors = [
+    Colors.green,
+    Colors.amber,
+    Colors.blue,
+    Colors.red,
+  ];
+  int _colorIndex = 0;
 
   @override
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: Duration(milliseconds: 1000),
     );
 
     _animation = Tween<double>(begin: 0.0, end: widget.progressValue).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
+
+    _colorAnimation = ColorTween(begin: _colors[0], end: _colors[3]).animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeInOut)
+          ..addListener(() {
+            setState(() {});
+          }));
+
     super.initState();
   }
 
@@ -53,6 +73,7 @@ class _CustomCircularProgressIndicatorState
                         value: _animation.value,
                         backgroundColor: Colors.white10,
                         strokeWidth: 12,
+                        valueColor: _colorAnimation,
                       ),
                     ),
                     Text(
@@ -71,9 +92,33 @@ class _CustomCircularProgressIndicatorState
           setState(() {
             isClicked = !isClicked;
             if (isClicked) {
-              _animationController.forward();
+              Timer(Duration(milliseconds: 800), () {
+                _colorIndex = (_colorIndex + 1) % _colors.length;
+                _colorAnimation = ColorTween(
+                  begin: _colorAnimation.value,
+                  end: _colors[_colorIndex],
+                ).animate(
+                  CurvedAnimation(
+                    parent: _animationController,
+                    curve: Curves.easeInOut,
+                  ),
+                );
+                _animationController.forward();
+              });
             } else {
-              _animationController.reverse();
+              Timer(Duration(milliseconds: 800), () {
+                _colorIndex = (_colorIndex + 1) % _colors.length;
+                _colorAnimation = ColorTween(
+                  begin: _colorAnimation.value,
+                  end: _colors[_colorIndex],
+                ).animate(
+                  CurvedAnimation(
+                    parent: _animationController,
+                    curve: Curves.easeInOut,
+                  ),
+                );
+                _animationController.reverse();
+              });
             }
           });
         },
