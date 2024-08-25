@@ -210,20 +210,23 @@ class _ExpandableCardState extends State<ExpandableCard>
   }
 
   Widget _rowItem(Image icon, String url) {
-    return Padding(
-      padding: EdgeInsets.only(left: 12, right: 12, top: 6),
-      child: Row(
-        children: [
-          SizedBox(width: 24, height: 24, child: icon),
-          const SizedBox(width: 3),
-          Flexible(
-            flex: 1,
-            child: Text(
-              url,
-              style: TextStyle(color: mainColor, fontWeight: FontWeight.w500),
+    return FadeTransition(
+      opacity: _opactityAnimation,
+      child: Padding(
+        padding: EdgeInsets.only(left: 12, right: 12, top: 6),
+        child: Row(
+          children: [
+            SizedBox(width: 24, height: 24, child: icon),
+            const SizedBox(width: 3),
+            Flexible(
+              flex: 1,
+              child: Text(
+                url,
+                style: TextStyle(color: mainColor, fontWeight: FontWeight.w500),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
