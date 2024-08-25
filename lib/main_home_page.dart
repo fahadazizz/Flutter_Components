@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_components/components/custom_like_button.dart';
 import 'package:flutter_components/components/custom_shimmer_effect.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/first_onBoarding_screen.dart';
@@ -79,6 +80,17 @@ class MainHomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => CustomShimmerEffect(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Custom Like Button',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomLikeButton(),
             ),
           );
         },
