@@ -32,7 +32,7 @@ class _ExpandableCardState extends State<ExpandableCard>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
     );
 
     _heightAnimation = Tween<double>(begin: 70, end: 430).animate(
@@ -71,19 +71,21 @@ class _ExpandableCardState extends State<ExpandableCard>
         child: AnimatedBuilder(
             animation: _animationController,
             builder: (context, child) {
-              return isFull
-                  // if full
-                  ? Expanded(
-                      child: Container(
-                        height: _heightAnimation.value,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        decoration: BoxDecoration(
-                          color: borderColor,
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: FadeTransition(
-                          opacity: _opactityAnimation,
-                          child: Column(
+              if (isFull) {
+                return Expanded(
+                  child: Container(
+                    height: _heightAnimation.value,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    decoration: BoxDecoration(
+                      color: borderColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: FadeTransition(
+                      opacity: _opactityAnimation,
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
+                        children: [
+                          Column(
                             children: [
                               Align(
                                 alignment: Alignment.centerRight,
@@ -134,65 +136,67 @@ class _ExpandableCardState extends State<ExpandableCard>
                                   'https://instagram.com/fahadazizz'),
                             ],
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              } else {
+                return Container(
+                  height: _heightAnimation.value,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  decoration: BoxDecoration(
+                    color: borderColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 55,
+                        height: 55,
+                        child: ClipRRect(
+                          child: Image.asset(
+                            'assets/dev.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
-                    )
-
-                  // if not full
-                  : Container(
-                      height: _heightAnimation.value,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      decoration: BoxDecoration(
-                        color: borderColor,
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
+                      _space(10, 0),
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            width: 55,
-                            height: 55,
-                            child: ClipRRect(
-                              child: Image.asset(
-                                'assets/dev.png',
-                                fit: BoxFit.contain,
-                              ),
+                          Text(
+                            '$userName',
+                            style: TextStyle(
+                              color: mainColor,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          _space(10, 0),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '$userName',
-                                style: TextStyle(
-                                  color: mainColor,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                '$passion',
-                                style: TextStyle(
-                                  color: mainColor,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ],
-                          ),
-                          _space(80, 0),
-                          IconButton(
-                            onPressed: _toggleCard,
-                            icon: Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              size: 24,
+                          Text(
+                            '$passion',
+                            style: TextStyle(
                               color: mainColor,
+                              fontSize: 12,
+                              fontWeight: FontWeight.normal,
                             ),
                           ),
                         ],
                       ),
-                    );
+                      _space(80, 0),
+                      IconButton(
+                        onPressed: _toggleCard,
+                        icon: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          size: 24,
+                          color: mainColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
             }),
       ),
     );
