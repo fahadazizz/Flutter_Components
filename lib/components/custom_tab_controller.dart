@@ -9,6 +9,7 @@ class CustomTabController extends StatefulWidget {
 class _CustomTabControllerState extends State<CustomTabController> {
   int _currentIndex = 0;
   PageController _pageController = PageController();
+  Color mainColor = Color(0xFF8C6EC4);
 
   @override
   Widget build(BuildContext context) {
@@ -92,10 +93,9 @@ class _CustomTabControllerState extends State<CustomTabController> {
           curve: Curves.easeInOut,
           child: Container(
             width: _currentIndex == thisIndex ? 60 : 0,
-            height: 6,
+            height: 4,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: Color(0xFF8C6EC4)),
+                borderRadius: BorderRadius.circular(8), color: mainColor),
           ),
         ),
       ],
