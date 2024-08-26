@@ -1,6 +1,7 @@
 // ignore_for_file: unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
 import 'package:flutter_components/components/custom_like_button.dart';
 import 'package:flutter_components/components/custom_circular_progress_indicator.dart';
 import 'package:flutter_components/components/custom_shimmer_effect.dart';
@@ -104,6 +105,17 @@ class MainHomePage extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) =>
                   CustomCircularProgressIndicator(progressValue: 0.6),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Custom Animated Image Scroll View',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CustomAnimatedCrouselScroll(),
             ),
           );
         },

@@ -70,6 +70,11 @@ flutter:
     - assets/github.png
     - assets/insta.png
     - assets/dev.png
+    - assets/mountain.jpg
+    - assets/mountain1.jpg
+    - assets/mountain2.jpg
+    - assets/mountain3.jpg
+    - assets/mountain4.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
