@@ -95,25 +95,29 @@ class _FirstContainedBottomNavigationBarState
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Icon(
-              icon,
-              color: containedProvider.currentIndex == thisIndex
-                  ? Color(0xff8274FF)
-                  : Colors.white70,
-            ),
-            Text(
-              '${containedProvider.currentIndex == thisIndex ? data : ""}',
-              style: TextStyle(
+        child: AnimatedOpacity(
+          opacity: containedProvider.currentIndex == thisIndex ? 1.0 : 0.5,
+          duration: Duration(milliseconds: 600),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Icon(
+                icon,
                 color: containedProvider.currentIndex == thisIndex
                     ? Color(0xff8274FF)
                     : Colors.white70,
-                fontWeight: FontWeight.w600,
               ),
-            ),
-          ],
+              Text(
+                '${containedProvider.currentIndex == thisIndex ? data : ""}',
+                style: TextStyle(
+                  color: containedProvider.currentIndex == thisIndex
+                      ? Color(0xff8274FF)
+                      : Colors.white70,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
