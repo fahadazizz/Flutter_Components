@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_components/components/custom_animated_scroll_wheel.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/main_home_page.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData.dark(), home: MainHomePage());
+    return MaterialApp(
+        theme: ThemeData.dark(), home: CustomAnimatedScrollWheel());
   }
 }
