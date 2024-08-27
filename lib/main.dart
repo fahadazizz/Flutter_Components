@@ -25,15 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData.dark(),
-        home: CustomAnimatedDragableContainer(
-          cards: [
-            CardModel(title: 'First', imageUrl: 'assets/mountain.jpg'),
-            CardModel(title: 'Second', imageUrl: 'assets/mountain1.jpg'),
-            CardModel(title: 'Third', imageUrl: 'assets/mountain2.jpg'),
-            CardModel(title: 'Fourth', imageUrl: 'assets/mountain3.jpg'),
-          ],
-        ));
+    return MaterialApp(theme: ThemeData.dark(), home: MainHomePage());
   }
 }
