@@ -37,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_onboarding_slider: ^1.0.11
   provider: ^6.1.2
+  animated_carousel_scroller: ^0.0.3
 
 dev_dependencies:
   flutter_test:
