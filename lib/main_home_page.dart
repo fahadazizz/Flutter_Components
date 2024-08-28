@@ -2,13 +2,14 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
+import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/custom_like_button.dart';
 import 'package:flutter_components/components/custom_circular_progress_indicator.dart';
 import 'package:flutter_components/components/custom_shimmer_effect.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/first_onBoarding_screen.dart';
 import 'package:flutter_components/components/password_authenticator_field.dart';
-import 'package:flutter_components/components/expandable_card.dart';
+import 'package:flutter_components/components/didntAddedexpandable_card.dart';
 import 'package:flutter_components/main_button.dart';
 
 import 'components/custom_tab_controller.dart';
@@ -116,6 +117,17 @@ class MainHomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => CustomAnimatedCrouselScroll(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Custom Animated SnackBar',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UsingCustomAnimatedSnackabar(),
             ),
           );
         },

@@ -10,19 +10,20 @@ class CustomAnimatedSnackbar extends StatefulWidget {
   final Color? snackTextColor;
   final bool show;
   final Alignment? align;
+  final Duration? duration;
 
-  CustomAnimatedSnackbar({
-    super.key,
-    required this.snackIcon,
-    required this.title,
-    required this.subTitile,
-    required this.backColor,
-    this.snackIconBack,
-    this.snackIconFront,
-    this.snackTextColor,
-    required this.show,
-    required this.align,
-  });
+  CustomAnimatedSnackbar(
+      {super.key,
+      required this.snackIcon,
+      required this.title,
+      required this.subTitile,
+      required this.backColor,
+      this.snackIconBack,
+      this.snackIconFront,
+      this.snackTextColor,
+      required this.show,
+      required this.align,
+      required this.duration});
 
   @override
   _CustomAnimatedSnackbarState createState() => _CustomAnimatedSnackbarState();
@@ -57,7 +58,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
       vsync: this,
     )..addListener(() {
         if (_animationController.isCompleted) {
-          Future.delayed(Duration(seconds: 3), () {
+          Future.delayed(widget.duration ?? const Duration(seconds: 3), () {
             _animationController.reverse();
           });
         }
@@ -71,7 +72,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
       begin: Offset(begignAnimate, endAnimate),
       end: Offset.zero,
     ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.bounceInOut),
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
     if (widget.show) {
@@ -126,7 +127,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
                         title: Text(
                           widget.title,
                           style: TextStyle(
-                            color: widget.snackTextColor ?? Colors.white,
+                            color: widget.snackTextColor,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
@@ -134,7 +135,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
                         subtitle: Text(
                           widget.subTitile,
                           style: TextStyle(
-                            color: widget.snackTextColor ?? Colors.white,
+                            color: widget.snackTextColor,
                             fontSize: 12,
                           ),
                           softWrap: true,
@@ -152,7 +153,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
                   height: 45,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: widget.snackIconBack ?? Colors.pink,
+                    color: widget.snackIconBack,
                     borderRadius: BorderRadius.circular(100),
                   ),
                   child: Icon(widget.snackIcon, color: widget.snackIconFront),
@@ -168,7 +169,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
                       _animationController.reverse();
                     });
                   },
-                  child: Icon(Icons.done_sharp, color: widget.snackIconFront),
+                  child: Icon(Icons.done_sharp, color: widget.snackTextColor),
                 ),
               ),
             ],
@@ -181,23 +182,36 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
 
 // snackbar show method
 OverlayEntry? overLayEntry;
-void showSnackBar(BuildContext context) {
+void showSnackBar(
+  BuildContext context,
+  IconData? snackIcon,
+  String? title,
+  String? subTitle,
+  Color? snackBackColor, {
+  Alignment? alignment,
+  Color? snackIconBack,
+  Color? snackIconFront,
+  Color? snackTextColor,
+  Duration? duration,
+}) {
   final overly = Overlay.of(context);
   overLayEntry = OverlayEntry(
     builder: (context) => Align(
-      alignment: Alignment.topCenter,
+      alignment: alignment ?? Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: CustomAnimatedSnackbar(
-          snackIcon: Icons.favorite,
-          snackIconBack: Color(0xff1A521D),
-          title: 'Welcome',
+          snackIcon: snackIcon ?? Icons.favorite_border,
+          title: title ?? 'Welcome',
           subTitile:
-              'This is first Custom Animated SnackBar developed by Fahad Aziz',
-          snackTextColor: Colors.white,
-          backColor: Color(0xff239328),
+              subTitle ?? 'This is Custom Animated Snackbar made by Fahad Aziz',
+          snackIconFront: snackIconFront ?? Colors.white,
+          snackIconBack: snackIconBack ?? Colors.green,
+          backColor: snackBackColor ?? Color(0xff256528),
+          snackTextColor: snackTextColor ?? Colors.white,
           show: true,
-          align: Alignment.topCenter,
+          align: alignment,
+          duration: duration,
         ),
       ),
     ),
@@ -205,7 +219,7 @@ void showSnackBar(BuildContext context) {
 
   overly.insert(overLayEntry!);
 
-  Future.delayed(Duration(seconds: 4), () {
+  Future.delayed(duration ?? const Duration(seconds: 4), () {
     overLayEntry!.remove();
   });
 }
@@ -218,11 +232,53 @@ class UsingCustomAnimatedSnackabar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              showSnackBar(context);
-            },
-            child: Text('Check Snackbar')),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  showSnackBar(
+                    context,
+                    Icons.favorite_border,
+                    'Welcome',
+                    'This is Custom Animated Snackbar made by Fahad Aziz',
+                    Color(0xff256528),
+                    alignment: Alignment.bottomCenter,
+                    snackIconFront: Colors.white,
+                    snackIconBack: Colors.green,
+                  );
+                },
+                child: Text('Bottom Snackbar')),
+            ElevatedButton(
+                onPressed: () {
+                  showSnackBar(
+                    context,
+                    Icons.favorite_border,
+                    'Welcome',
+                    'This is Custom Animated Snackbar made by Fahad Aziz',
+                    Color(0xff256528),
+                    alignment: Alignment.center,
+                    snackIconFront: Colors.white,
+                    snackIconBack: Colors.green,
+                  );
+                },
+                child: Text('Center Snackbar')),
+            ElevatedButton(
+                onPressed: () {
+                  showSnackBar(
+                    context,
+                    Icons.favorite_border,
+                    'Welcome',
+                    'This is Custom Animated Snackbar made by Fahad Aziz',
+                    Color(0xff256528),
+                    alignment: Alignment.topCenter,
+                    snackIconFront: Colors.white,
+                    snackIconBack: Colors.green,
+                  );
+                },
+                child: Text('Top Snackbar')),
+          ],
+        ),
       ),
     );
   }
