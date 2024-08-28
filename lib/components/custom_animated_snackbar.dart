@@ -45,8 +45,8 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
       begignAnimate = 4;
       endAnimate = 0;
     } else if (widget.align == Alignment.topCenter) {
-      begignAnimate = 4;
-      endAnimate = 4;
+      begignAnimate = 0;
+      endAnimate = -4;
     } else {
       begignAnimate = 0;
       endAnimate = 4;
@@ -71,7 +71,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
       begin: Offset(begignAnimate, endAnimate),
       end: Offset.zero,
     ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+      CurvedAnimation(parent: _animationController, curve: Curves.bounceInOut),
     );
 
     if (widget.show) {
@@ -185,7 +185,7 @@ void showSnackBar(BuildContext context) {
   final overly = Overlay.of(context);
   overLayEntry = OverlayEntry(
     builder: (context) => Align(
-      alignment: Alignment.bottomCenter,
+      alignment: Alignment.topCenter,
       child: Padding(
         padding: const EdgeInsets.all(14),
         child: CustomAnimatedSnackbar(
@@ -197,7 +197,7 @@ void showSnackBar(BuildContext context) {
           snackTextColor: Colors.white,
           backColor: Color(0xff239328),
           show: true,
-          align: Alignment.bottomCenter,
+          align: Alignment.topCenter,
         ),
       ),
     ),
