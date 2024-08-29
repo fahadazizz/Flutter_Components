@@ -6,6 +6,7 @@ import 'package:flutter_components/components/custom_animated_card.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/main_home_page.dart';
+import 'package:flutter_components/using_custom_package/fancy_animated_snackbar.dart';
 import 'package:flutter_components/using_custom_package/first_animated_carousel_scroll.dart';
 import 'package:provider/provider.dart';
 
