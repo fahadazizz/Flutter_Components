@@ -32,7 +32,7 @@ class _ExpandableCardState extends State<ExpandableCard>
   void initState() {
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 600),
     );
 
     _heightAnimation = Tween<double>(begin: 70, end: 430).animate(
@@ -210,8 +210,9 @@ class _ExpandableCardState extends State<ExpandableCard>
   }
 
   Widget _rowItem(Image icon, String url) {
-    return FadeTransition(
-      opacity: _opactityAnimation,
+    return AnimatedOpacity(
+      duration: Duration(milliseconds: 800),
+      opacity: _opactityAnimation.value,
       child: Padding(
         padding: EdgeInsets.only(left: 12, right: 12, top: 6),
         child: Row(
