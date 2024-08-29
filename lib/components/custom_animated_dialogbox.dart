@@ -11,41 +11,7 @@ class _CustomAnimatedDialogboxCodeState
     extends State<CustomAnimatedDialogboxCode> {
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Stack(
-        alignment: Alignment.topCenter,
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width - 40,
-            height: 340,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(18),
-            ),
-          ),
-          Positioned(
-            top: -75,
-            child: Container(
-              padding: EdgeInsets.all(10),
-              width: 150,
-              height: 150,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(100),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.asset(
-                  'assets/done.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    return Material();
   }
 }
 
@@ -76,12 +42,59 @@ class UsingCustomAnimatedDialogBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: ElevatedButton(
-            onPressed: () {
-              CustomAnimatedDialogbox.cutomAnimatedDialogBox(context);
-            },
-            child: Text('Check Dialog Box')),
+        child: Stack(
+          alignment: Alignment.topCenter,
+          clipBehavior: Clip.none,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width - 40,
+              height: 340,
+              decoration: BoxDecoration(
+                color: Colors.white10,
+                borderRadius: BorderRadius.circular(18),
+              ),
+              child: Column(
+                children: [
+                  Spacer(),
+                  Text('Welcome'),
+                  Text('Welcome'),
+                  Buttons(text: 'Ok', onPress: () {}),
+                ],
+              ),
+            ),
+            Positioned(
+              top: -75,
+              child: Container(
+                padding: EdgeInsets.all(10),
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: Image.asset(
+                    'assets/done.png',
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
+  }
+}
+
+class Buttons extends StatelessWidget {
+  String? text;
+  VoidCallback onPress;
+
+  Buttons({required this.text, required this.onPress});
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
