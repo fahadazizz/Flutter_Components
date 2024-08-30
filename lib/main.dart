@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
 import 'package:flutter_components/components/custom_animated_card.dart';
 import 'package:flutter_components/components/custom_animated_dialogbox.dart';
+import 'package:flutter_components/components/custom_animated_slide_button.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/tab_base_navigation.dart';
@@ -30,6 +31,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData.dark(), home: const MainHomePage());
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: CustomAnimatedSlideButton(
+          onPress: () {},
+          afterSlideText: 'Welcome',
+          afterSlideTextColor: Colors.black87,
+          afterSlideColor: Colors.white70,
+          sliderBackColor: Colors.amber),
+    );
   }
 }
