@@ -17,13 +17,13 @@ class _TabBaseNavigationState extends State<TabBaseNavigation>
   @override
   void initState() {
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 800));
+        AnimationController(vsync: this, duration: Duration(milliseconds: 600));
     _pageAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
     _colorAnimation =
-        ColorTween(begin: Colors.black, end: Colors.pinkAccent).animate(
+        ColorTween(begin: Colors.black, end: const Color(0xff8274FF)).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
 
@@ -146,7 +146,7 @@ class NavItems extends StatelessWidget {
       margin: const EdgeInsets.only(left: 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9),
-        border: Border.all(color: Colors.pinkAccent.withOpacity(0.5)),
+        border: Border.all(color: const Color(0xff8274FF).withOpacity(0.5)),
         color: back,
       ),
       child: RichText(
