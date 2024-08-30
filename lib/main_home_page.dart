@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
+import 'package:flutter_components/components/custom_animated_dialogbox.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/custom_like_button.dart';
 import 'package:flutter_components/components/custom_circular_progress_indicator.dart';
@@ -10,6 +11,7 @@ import 'package:flutter_components/components/first_contained_bottom_navigation_
 import 'package:flutter_components/components/first_onBoarding_screen.dart';
 import 'package:flutter_components/components/password_authenticator_field.dart';
 import 'package:flutter_components/components/didntAddedexpandable_card.dart';
+import 'package:flutter_components/components/tab_base_navigation.dart';
 import 'package:flutter_components/main_button.dart';
 
 import 'components/custom_tab_controller.dart';
@@ -128,6 +130,28 @@ class MainHomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => UsingCustomAnimatedSnackabar(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Custom Animated Dialog Box',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => UsingCustomAnimatedDialogBox(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Custom Tab Base Navigation',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => TabBaseNavigation(),
             ),
           );
         },
