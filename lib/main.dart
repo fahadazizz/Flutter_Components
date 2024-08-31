@@ -34,30 +34,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CheckAnimatedSlideButton(),
-    );
-  }
-}
-
-class CheckAnimatedSlideButton extends StatelessWidget {
-  const CheckAnimatedSlideButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CustomAnimatedSlideButton(
-          width: 240,
-          height: 60,
-          beforeSlideText: 'Slide to Continue',
-          beforeSlideColor: Colors.white10,
-          afterSlideColor: Colors.amber,
-          afterSliderBackColor: Colors.amber,
-          onPress: () {
-            fancyAnimatedSnackbar(context);
-          },
-        ),
-      ),
+      home: MainHomePage(),
     );
   }
 }

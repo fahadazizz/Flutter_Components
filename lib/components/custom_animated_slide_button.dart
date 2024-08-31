@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fancy_animated_snackbar/fancy_animated_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -165,10 +166,10 @@ class _CustomAnimatedSlideButtonState extends State<CustomAnimatedSlideButton>
                 child: Transform.translate(
                   offset: Offset(_dragOffset, 0),
                   child: Container(
-                    width: 60,
-                    height: 60,
+                    width: widget.height,
+                    height: widget.height,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(35),
+                        borderRadius: BorderRadius.circular(20),
                         color: widget.afterSliderBackColor,
                         boxShadow: [
                           BoxShadow(
@@ -177,9 +178,9 @@ class _CustomAnimatedSlideButtonState extends State<CustomAnimatedSlideButton>
                           )
                         ]),
                     alignment: Alignment.center,
-                    child: const Icon(
+                    child: Icon(
                       Icons.arrow_forward_ios,
-                      size: 30,
+                      size: widget.height * 0.5,
                     ),
                   ),
                 ),
@@ -193,5 +194,29 @@ class _CustomAnimatedSlideButtonState extends State<CustomAnimatedSlideButton>
 
   void onPressCheck() {
     widget.onPress();
+  }
+}
+
+// using this button
+class CheckAnimatedSlideButton extends StatelessWidget {
+  const CheckAnimatedSlideButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: CustomAnimatedSlideButton(
+          width: 240,
+          height: 60,
+          beforeSlideText: 'Slide to Continue',
+          beforeSlideColor: Colors.white10,
+          afterSlideColor: Colors.amber,
+          afterSliderBackColor: Colors.amber,
+          onPress: () {
+            fancyAnimatedSnackbar(context);
+          },
+        ),
+      ),
+    );
   }
 }

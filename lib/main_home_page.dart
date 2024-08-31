@@ -14,6 +14,7 @@ import 'package:flutter_components/components/didntAddedexpandable_card.dart';
 import 'package:flutter_components/components/tab_base_navigation.dart';
 import 'package:flutter_components/main_button.dart';
 
+import 'components/custom_animated_slide_button.dart';
 import 'components/custom_tab_controller.dart';
 
 class MainHomePage extends StatelessWidget {
@@ -152,6 +153,17 @@ class MainHomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => TabBaseNavigation(),
+            ),
+          );
+        },
+      ),
+      MainButton(
+        data: 'Custom Slider Button',
+        onPress: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CheckAnimatedSlideButton(),
             ),
           );
         },
