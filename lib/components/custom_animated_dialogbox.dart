@@ -239,7 +239,7 @@ class CustomAnimatedDialogbox {
             topImage: topImage ?? 'assets/done.png',
             textColor: textColor ?? Colors.white,
             dialogBackColor: dialogBackColor ?? Colors.black,
-            buttonBackColor: buttonColor ?? const Color(0xff2BC67A),
+            buttonBackColor: buttonColor ?? Colors.pinkAccent,
             buttonTextColor: buttonTextColor ?? Colors.white,
             animationDuration:
                 animationDuration ?? const Duration(milliseconds: 400),
@@ -274,6 +274,9 @@ class UsingCustomAnimatedDialogBox extends StatelessWidget {
                     description:
                         'This is Custom Animated Dialog Box Developed by Fahad Aziz',
                     buttonText: 'OK',
+                    dialogBackColor: Colors.white,
+                    textColor: Colors.black87,
+                    buttonColor: Color(0xff2BC67A),
                   );
                 },
                 child: const Text('Check Dialog Box')),

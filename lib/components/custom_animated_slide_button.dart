@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:fancy_animated_snackbar/fancy_animated_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
