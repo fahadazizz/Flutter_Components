@@ -1,5 +1,6 @@
 // ignore_for_file: unused_import
 
+import 'package:fancy_animated_snackbar/fancy_animated_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
 import 'package:flutter_components/components/custom_animated_card.dart';
@@ -33,12 +34,30 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CustomAnimatedSlideButton(
-          onPress: () {},
-          afterSlideText: 'Welcome',
-          afterSlideTextColor: Colors.black87,
-          afterSlideColor: Colors.white70,
-          sliderBackColor: Colors.amber),
+      home: CheckAnimatedSlideButton(),
+    );
+  }
+}
+
+class CheckAnimatedSlideButton extends StatelessWidget {
+  const CheckAnimatedSlideButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: CustomAnimatedSlideButton(
+          width: 240,
+          height: 60,
+          beforeSlideText: 'Slide to Continue',
+          beforeSlideColor: Colors.white10,
+          afterSlideColor: Colors.amber,
+          afterSliderBackColor: Colors.amber,
+          onPress: () {
+            fancyAnimatedSnackbar(context);
+          },
+        ),
+      ),
     );
   }
 }
