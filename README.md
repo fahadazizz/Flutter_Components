@@ -52,7 +52,7 @@ Here is a list of the components currently available in this repository:
 
 12. **Custom Animated Slider Button**  
     *Description:* An animated slider button with customizable design and behavior.  
-    *Video Link:*
+    *Video Link:* ![Slider](https://github.com/user-attachments/assets/231f5a0f-1d58-4dd6-8c0d-837e7adf2c85)
 
 13. **Custom Animated Dialog Box**  
     *Description:* A dialog box with animations for showing and hiding content.  
