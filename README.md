@@ -8,7 +8,6 @@ Here is a list of the components currently available in this repository:
 
 1. **OnBoard Screen**  
    *Description:* A customizable onboarding screen to guide users through initial app interactions.  
-   *Video Link:* [Watch the video here](https://www.linkedin.com/feed/update/urn:li:activity:7236040126676533248?utm_source=share&utm_medium=member_desktop)
 
 2. **Custom Tab Bar Navigation**  
    *Description:* A fully customizable tab bar for navigation with various styling options.  
@@ -52,7 +51,6 @@ Here is a list of the components currently available in this repository:
 
 12. **Custom Animated Slider Button**  
     *Description:* An animated slider button with customizable design and behavior.  
-    *Video Link:* [Coming Soon]
 
 13. **Custom Animated Dialog Box**  
     *Description:* A dialog box with animations for showing and hiding content.  
@@ -73,9 +71,3 @@ I am continuously working on new components and features. Stay tuned for more ad
 - Advanced input fields
 - Interactive charts and graphs
 - Customizable widgets for advanced UI/UX
-
-## Getting Started
-
-1. **Clone the Repository**
-   ```bash
-   git clone https://github.com/your-username/flutter-components.git
