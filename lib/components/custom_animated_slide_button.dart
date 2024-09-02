@@ -44,7 +44,7 @@ class _CustomAnimatedSlideButtonState extends State<CustomAnimatedSlideButton>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 800),
     );
 
     _slideAnimation = Tween<Offset>(
@@ -167,7 +167,7 @@ class _CustomAnimatedSlideButtonState extends State<CustomAnimatedSlideButton>
                     width: widget.height,
                     height: widget.height,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+                        borderRadius: BorderRadius.circular(100),
                         color: widget.afterSliderBackColor,
                         boxShadow: [
                           BoxShadow(
@@ -211,7 +211,9 @@ class CheckAnimatedSlideButton extends StatelessWidget {
           afterSlideColor: Colors.amber,
           afterSliderBackColor: Colors.amber,
           onPress: () {
-            fancyAnimatedSnackbar(context);
+            fancyAnimatedSnackbar(context,
+                subTitle:
+                    'This is Custom Animated Slide button Developed by Fahad');
           },
         ),
       ),

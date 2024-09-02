@@ -7,6 +7,7 @@ import 'package:flutter_components/components/custom_animated_card.dart';
 import 'package:flutter_components/components/custom_animated_dialogbox.dart';
 import 'package:flutter_components/components/custom_animated_slide_button.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
+import 'package:flutter_components/components/custom_otp_field.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/page_navigation_animation.dart';
 import 'package:flutter_components/components/second_animated_overlay_bottom_navbar.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: SecondAnimatedOverlayBottomNavbar(),
+      home: const UsingCustomAnimatedSnackabar(),
     );
   }
 }

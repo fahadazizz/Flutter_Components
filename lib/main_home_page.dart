@@ -10,7 +10,7 @@ import 'package:flutter_components/components/custom_shimmer_effect.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/first_onBoarding_screen.dart';
 import 'package:flutter_components/components/password_authenticator_field.dart';
-import 'package:flutter_components/components/didntAddedexpandable_card.dart';
+import 'package:flutter_components/components/custom_animated_expandable_card.dart';
 import 'package:flutter_components/components/tab_base_navigation.dart';
 import 'package:flutter_components/main_button.dart';
 

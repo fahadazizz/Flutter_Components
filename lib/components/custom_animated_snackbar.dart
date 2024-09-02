@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CustomAnimatedSnackbar extends StatefulWidget {
+class AnimatedSnackBar extends StatefulWidget {
   final String title;
   final String subTitile;
   final IconData snackIcon;
@@ -12,7 +12,7 @@ class CustomAnimatedSnackbar extends StatefulWidget {
   final Alignment? align;
   final Duration? duration;
 
-  CustomAnimatedSnackbar(
+  AnimatedSnackBar(
       {super.key,
       required this.snackIcon,
       required this.title,
@@ -26,10 +26,10 @@ class CustomAnimatedSnackbar extends StatefulWidget {
       required this.duration});
 
   @override
-  _CustomAnimatedSnackbarState createState() => _CustomAnimatedSnackbarState();
+  _AnimatedSnackBarState createState() => _AnimatedSnackBarState();
 }
 
-class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
+class _AnimatedSnackBarState extends State<AnimatedSnackBar>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
@@ -81,7 +81,7 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
   }
 
   @override
-  void didUpdateWidget(CustomAnimatedSnackbar oldWidget) {
+  void didUpdateWidget(AnimatedSnackBar oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.show != oldWidget.show) {
       if (widget.show) {
@@ -90,6 +90,12 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
         _animationController.reverse();
       }
     }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -159,19 +165,6 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
                   child: Icon(widget.snackIcon, color: widget.snackIconFront),
                 ),
               ),
-              Positioned(
-                top: 5,
-                right: 10,
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      overLayEntry!.remove();
-                      _animationController.reverse();
-                    });
-                  },
-                  child: Icon(Icons.done_sharp, color: widget.snackTextColor),
-                ),
-              ),
             ],
           ),
         ),
@@ -180,50 +173,237 @@ class _CustomAnimatedSnackbarState extends State<CustomAnimatedSnackbar>
   }
 }
 
-// snackbar show method
-OverlayEntry? overLayEntry;
-void showSnackBar(
-  BuildContext context,
-  IconData? snackIcon,
-  String? title,
-  String? subTitle,
-  Color? snackBackColor, {
-  Alignment? alignment,
-  Color? snackIconBack,
-  Color? snackIconFront,
-  Color? snackTextColor,
-  Duration? duration,
-}) {
-  final overly = Overlay.of(context);
-  overLayEntry = OverlayEntry(
-    builder: (context) => Align(
-      alignment: alignment ?? Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.all(14),
-        child: CustomAnimatedSnackbar(
-          snackIcon: snackIcon ?? Icons.favorite_border,
-          title: title ?? 'Welcome',
-          subTitile:
-              subTitle ?? 'This is Custom Animated Snackbar made by Fahad Aziz',
-          snackIconFront: snackIconFront ?? Colors.white,
-          snackIconBack: snackIconBack ?? Colors.green,
-          backColor: snackBackColor ?? Color(0xff256528),
-          snackTextColor: snackTextColor ?? Colors.white,
-          show: true,
-          align: alignment,
-          duration: duration,
+///
+//
+//
+class CustomAnimatedSnackbar {
+  // status Ok
+  static void successSnackbar(
+    BuildContext context, {
+    required String? title,
+    required String? subTitle,
+    IconData? snackIcon,
+    Color? snackBackColor,
+    Alignment? alignment,
+    Color? snackIconBack,
+    Color? snackIconFront,
+    Color? snackTextColor,
+    Duration? duration,
+  }) {
+    OverlayEntry? overLayEntry;
+    final overly = Overlay.of(context);
+    overLayEntry = OverlayEntry(
+      builder: (context) => Align(
+        alignment: alignment ?? Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: AnimatedSnackBar(
+            snackIcon: snackIcon ?? Icons.favorite_border,
+            title: title ?? 'Welcome',
+            subTitile: subTitle ??
+                'This is Custom Animated Snackbar made by Fahad Aziz',
+            snackIconFront: snackIconFront ?? Colors.white,
+            snackIconBack: snackIconBack ?? Colors.green,
+            backColor: snackBackColor ?? Color(0xff256528),
+            snackTextColor: snackTextColor ?? Colors.white,
+            show: true,
+            align: alignment,
+            duration: duration,
+          ),
         ),
       ),
-    ),
-  );
+    );
 
-  overly.insert(overLayEntry!);
+    overly.insert(overLayEntry!);
 
-  Future.delayed(duration ?? const Duration(seconds: 4), () {
-    overLayEntry!.remove();
-  });
+    Future.delayed(duration ?? const Duration(seconds: 4), () {
+      overLayEntry!.remove();
+    });
+  }
+
+  //
+// error snackbar
+  static void errorSnackbar(
+    BuildContext context, {
+    required String? title,
+    required String? subTitle,
+    IconData? snackIcon,
+    Color? snackBackColor,
+    Alignment? alignment,
+    Color? snackIconBack,
+    Color? snackIconFront,
+    Color? snackTextColor,
+    Duration? duration,
+  }) {
+    OverlayEntry? overLayEntry;
+    final overly = Overlay.of(context);
+    overLayEntry = OverlayEntry(
+      builder: (context) => Align(
+        alignment: alignment ?? Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: AnimatedSnackBar(
+            snackIcon: snackIcon ?? Icons.error,
+            title: title ?? 'Welcome',
+            subTitile: subTitle ??
+                'This is Custom Animated Snackbar made by Fahad Aziz',
+            snackIconFront: snackIconFront ?? Colors.white,
+            snackIconBack: snackIconBack ?? Colors.red,
+            backColor: snackBackColor ?? Color(0xffB00020),
+            snackTextColor: snackTextColor ?? Colors.white,
+            show: true,
+            align: alignment,
+            duration: duration,
+          ),
+        ),
+      ),
+    );
+
+    overly.insert(overLayEntry!);
+
+    Future.delayed(duration ?? const Duration(seconds: 4), () {
+      overLayEntry!.remove();
+    });
+  }
+
+  //
+// info snackbar
+  static void infoSnackbar(
+    BuildContext context, {
+    required String? title,
+    required String? subTitle,
+    IconData? snackIcon,
+    Color? snackBackColor,
+    Alignment? alignment,
+    Color? snackIconBack,
+    Color? snackIconFront,
+    Color? snackTextColor,
+    Duration? duration,
+  }) {
+    OverlayEntry? overLayEntry;
+    final overly = Overlay.of(context);
+    overLayEntry = OverlayEntry(
+      builder: (context) => Align(
+        alignment: alignment ?? Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: AnimatedSnackBar(
+            snackIcon: snackIcon ?? Icons.insert_drive_file_outlined,
+            title: title ?? 'Welcome',
+            subTitile: subTitle ??
+                'This is Custom Animated Snackbar made by Fahad Aziz',
+            snackIconFront: snackIconFront ?? Colors.white,
+            snackIconBack: snackIconBack ?? Colors.blue,
+            backColor: snackBackColor ?? Colors.blue[800],
+            snackTextColor: snackTextColor ?? Colors.white,
+            show: true,
+            align: alignment,
+            duration: duration,
+          ),
+        ),
+      ),
+    );
+
+    overly.insert(overLayEntry);
+
+    Future.delayed(duration ?? const Duration(seconds: 4), () {
+      overLayEntry!.remove();
+    });
+  }
+
+  //
+// warning snackbar
+  static void warningSnackbar(
+    BuildContext context, {
+    required String? title,
+    required String? subTitle,
+    IconData? snackIcon,
+    Color? snackBackColor,
+    Alignment? alignment,
+    Color? snackIconBack,
+    Color? snackIconFront,
+    Color? snackTextColor,
+    Duration? duration,
+  }) {
+    OverlayEntry? overLayEntry;
+    final overly = Overlay.of(context);
+    overLayEntry = OverlayEntry(
+      builder: (context) => Align(
+        alignment: alignment ?? Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: AnimatedSnackBar(
+            snackIcon: snackIcon ?? Icons.warning,
+            title: title ?? 'Welcome',
+            subTitile: subTitle ??
+                'This is Custom Animated Snackbar made by Fahad Aziz',
+            snackIconFront: snackIconFront ?? Colors.black,
+            snackIconBack: snackIconBack ?? Colors.orange,
+            backColor: snackBackColor ?? Colors.orange[800],
+            snackTextColor: snackTextColor ?? Colors.white,
+            show: true,
+            align: alignment,
+            duration: duration,
+          ),
+        ),
+      ),
+    );
+
+    overly.insert(overLayEntry!);
+
+    Future.delayed(duration ?? const Duration(seconds: 4), () {
+      overLayEntry!.remove();
+    });
+  }
+
+  //
+// warning snackbar
+  static void loadingSnackbar(
+    BuildContext context, {
+    required String? title,
+    required String? subTitle,
+    IconData? snackIcon,
+    Color? snackBackColor,
+    Alignment? alignment,
+    Color? snackIconBack,
+    Color? snackIconFront,
+    Color? snackTextColor,
+    Duration? duration,
+  }) {
+    OverlayEntry? overLayEntry;
+    final overly = Overlay.of(context);
+    overLayEntry = OverlayEntry(
+      builder: (context) => Align(
+        alignment: alignment ?? Alignment.bottomCenter,
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: AnimatedSnackBar(
+            snackIcon: snackIcon ?? Icons.warning,
+            title: title ?? 'Welcome',
+            subTitile: subTitle ??
+                'This is Custom Animated Snackbar made by Fahad Aziz',
+            snackIconFront: snackIconFront ?? Colors.white,
+            snackIconBack: snackIconBack ?? Colors.grey,
+            backColor: snackBackColor ?? Colors.grey[800],
+            snackTextColor: snackTextColor ?? Colors.white,
+            show: true,
+            align: alignment,
+            duration: duration,
+          ),
+        ),
+      ),
+    );
+
+    overly.insert(overLayEntry!);
+
+    Future.delayed(duration ?? const Duration(seconds: 4), () {
+      overLayEntry!.remove();
+    });
+  }
 }
 
+//
+//
 // show snackbar class
 class UsingCustomAnimatedSnackabar extends StatelessWidget {
   const UsingCustomAnimatedSnackabar({super.key});
@@ -233,50 +413,65 @@ class UsingCustomAnimatedSnackabar extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-                onPressed: () {
-                  showSnackBar(
-                    context,
-                    Icons.favorite_border,
-                    'Welcome',
-                    'This is Custom Animated Snackbar made by Fahad Aziz',
-                    Color(0xff256528),
-                    alignment: Alignment.bottomCenter,
-                    snackIconFront: Colors.white,
-                    snackIconBack: Colors.green,
-                  );
-                },
-                child: Text('Bottom Snackbar')),
+              onPressed: () {
+                CustomAnimatedSnackbar.successSnackbar(
+                  context,
+                  title: 'Welcome',
+                  subTitle: 'This is Success Snackbar developed by Fahad Aziz',
+                  duration: Duration(seconds: 3),
+                  snackIcon: Icons.done,
+                );
+              },
+              child: Text('Success Snackbar'),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  showSnackBar(
-                    context,
-                    Icons.favorite_border,
-                    'Welcome',
-                    'This is Custom Animated Snackbar made by Fahad Aziz',
-                    Color(0xff256528),
-                    alignment: Alignment.center,
-                    snackIconFront: Colors.white,
-                    snackIconBack: Colors.green,
-                  );
-                },
-                child: Text('Center Snackbar')),
+              onPressed: () {
+                CustomAnimatedSnackbar.errorSnackbar(
+                  context,
+                  title: 'Welcome',
+                  subTitle: 'This is Error Snackbar developed by Fahad Aziz',
+                  duration: Duration(seconds: 3),
+                  snackIcon: Icons.error,
+                );
+              },
+              child: Text('Error Snackbar'),
+            ),
             ElevatedButton(
-                onPressed: () {
-                  showSnackBar(
-                    context,
-                    Icons.favorite_border,
-                    'Welcome',
-                    'This is Custom Animated Snackbar made by Fahad Aziz',
-                    Color(0xff256528),
-                    alignment: Alignment.topCenter,
-                    snackIconFront: Colors.white,
-                    snackIconBack: Colors.green,
-                  );
-                },
-                child: Text('Top Snackbar')),
+              onPressed: () {
+                CustomAnimatedSnackbar.infoSnackbar(
+                  context,
+                  title: 'Welcome',
+                  subTitle: 'This is Info Snackbar developed by Fahad Aziz',
+                  duration: Duration(seconds: 3),
+                );
+              },
+              child: Text('info Snackbar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                CustomAnimatedSnackbar.warningSnackbar(
+                  context,
+                  title: 'Welcome',
+                  subTitle: 'This is Warning Snackbar developed by Fahad Aziz',
+                  duration: Duration(seconds: 3),
+                );
+              },
+              child: Text('Warning Snackbar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                CustomAnimatedSnackbar.loadingSnackbar(
+                  context,
+                  title: 'Welcome',
+                  subTitle: 'This is Loading Snackbar developed by Fahad Aziz',
+                  duration: Duration(seconds: 3),
+                );
+              },
+              child: Text('Loading Snackbar'),
+            ),
           ],
         ),
       ),
