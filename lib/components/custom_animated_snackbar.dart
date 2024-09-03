@@ -378,7 +378,7 @@ class CustomAnimatedSnackbar {
         child: Padding(
           padding: const EdgeInsets.all(14),
           child: AnimatedSnackBar(
-            snackIcon: snackIcon ?? Icons.warning,
+            snackIcon: snackIcon ?? Icons.refresh,
             title: title ?? 'Welcome',
             subTitile: subTitle ??
                 'This is Custom Animated Snackbar made by Fahad Aziz',
