@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
 import 'package:flutter_components/components/custom_animated_card.dart';
 import 'package:flutter_components/components/custom_animated_dialogbox.dart';
+import 'package:flutter_components/components/custom_animated_rating_box.dart';
 import 'package:flutter_components/components/custom_animated_slide_button.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/custom_otp_field.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: const UsingCustomAnimatedSnackabar(),
+      home: const CustomAnimatedRatingBox(),
     );
   }
 }
