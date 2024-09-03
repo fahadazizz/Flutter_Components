@@ -31,14 +31,28 @@ void main() {
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  double _rating = 3.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: const CustomAnimatedRatingBox(),
+      home: CustomAnimatedRatingBox(
+        starCount: 5,
+        rating: _rating,
+        onRatingChanged: (rating) {
+          setState(() {
+            _rating = rating;
+          });
+        },
+      ),
     );
   }
 }

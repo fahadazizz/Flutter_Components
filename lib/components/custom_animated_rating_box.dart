@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class CustomAnimatedRatingBox extends StatefulWidget {
-  const CustomAnimatedRatingBox({super.key});
+  final int starCount;
+  final double rating;
+  final Function(double) onRatingChanged;
+
+  CustomAnimatedRatingBox({
+    this.starCount = 5,
+    this.rating = 0.0,
+    required this.onRatingChanged,
+  });
 
   @override
   State<CustomAnimatedRatingBox> createState() =>
@@ -9,6 +17,21 @@ class CustomAnimatedRatingBox extends StatefulWidget {
 }
 
 class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox> {
+  late double _rating;
+
+  @override
+  void initState() {
+    super.initState();
+    _rating = widget.rating;
+  }
+
+  void _handleTap(int index) {
+    setState(() {
+      _rating = index.toDouble() + 1;
+    });
+    widget.onRatingChanged(_rating);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,14 +58,22 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _starButton(0),
-                _starButton(1),
-                _starButton(2),
-                _starButton(3),
-                _starButton(4),
-              ],
-            )
+              children: List.generate(widget.starCount, (index) {
+                return GestureDetector(
+                  onTap: () => _handleTap(index),
+                  child: Icon(
+                    index < _rating.floor()
+                        ? Icons.star
+                        : index < _rating
+                            ? Icons.star_half
+                            : Icons.star_border,
+                    color: Colors.white,
+                    size: 40.0,
+                  ),
+                );
+              }),
+            ),
+            Container(),
           ]),
         ),
       ),
