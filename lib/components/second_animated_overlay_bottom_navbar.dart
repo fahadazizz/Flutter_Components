@@ -222,7 +222,8 @@ class _SecondAnimatedOverlayBottomNavbarState
       },
       child: Icon(
         icons,
-        color: _currentIndex == thisIndex ? Color(0xff8274FF) : Colors.white,
+        color:
+            _currentIndex == thisIndex ? const Color(0xff8274FF) : Colors.white,
       ),
     );
   }

@@ -39,20 +39,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  double _rating = 3.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CustomAnimatedRatingBox(
-        starCount: 5,
-        rating: _rating,
-        onRatingChanged: (rating) {
-          setState(() {
-            _rating = rating;
-          });
-        },
-      ),
+      home: SecondAnimatedOverlayBottomNavbar(),
     );
   }
 }
