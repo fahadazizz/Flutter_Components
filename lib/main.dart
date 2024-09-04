@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: SecondAnimatedOverlayBottomNavbar(),
+      home: RatingBox(),
     );
   }
 }
