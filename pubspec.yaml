@@ -79,6 +79,7 @@ flutter:
     - assets/mountain3.jpg
     - assets/mountain4.jpg
     - assets/done.png
+    - assets/travelerImage1.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
