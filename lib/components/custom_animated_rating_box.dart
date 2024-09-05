@@ -22,18 +22,50 @@ class CustomAnimatedRatingBox extends StatefulWidget {
       _CustomAnimatedRatingBoxState();
 }
 
-class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox> {
+class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
+    with TickerProviderStateMixin {
+  late AnimationController _animationController;
+  late Animation<double> _starAnimation;
+
   late double _rating;
+  String emoji = '😊';
 
   @override
   void initState() {
     super.initState();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    _starAnimation = Tween<double>(begin: 40, end: 42).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.bounceIn),
+    );
     _rating = widget.rating;
   }
 
   void _handleTap(int index) {
     setState(() {
       _rating = index.toDouble() + 1;
+      switch (_rating) {
+        case 1:
+          [
+            emoji = '😐',
+          ];
+        case 2:
+          [
+            emoji = '🙁',
+          ];
+        case 3:
+          [
+            emoji = '🙂',
+          ];
+        case 4:
+          [
+            emoji = '😄',
+          ];
+        case 5:
+          [
+            emoji = '😀',
+          ];
+      }
     });
     widget.onRatingChanged(_rating);
   }
@@ -49,40 +81,50 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox> {
         children: [
           Container(
             width: MediaQuery.of(context).size.width - 32,
-            height: 200,
+            height: 180,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
-              color: Colors.black38,
+              color: Colors.white12,
             ),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _space(25),
+                  _space(30),
                   SizedBox(
                     width: 280,
                     child: Text(
                       "${widget.text}",
                       style: const TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  _space(20),
+                  _space(15),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(widget.starCount, (index) {
-                      return GestureDetector(
-                        onTap: () => _handleTap(index),
-                        child: Icon(
-                          index < _rating.floor()
-                              ? Icons.star_rounded
-                              : Icons.star_border_purple500_rounded,
-                          color: Colors.white,
-                          size: 40.0,
-                        ),
+                      return AnimatedBuilder(
+                        animation: _animationController,
+                        builder: (context, child) {
+                          return GestureDetector(
+                            onTap: () {
+                              _handleTap(index);
+                              _animationController.forward().whenComplete(() {
+                                _animationController.reverse();
+                              });
+                            },
+                            child: Icon(
+                              index < _rating.floor()
+                                  ? Icons.star_rounded
+                                  : Icons.star_border_purple500_rounded,
+                              color: Colors.white,
+                              size: _starAnimation.value,
+                            ),
+                          );
+                        },
                       );
                     }),
                   ),
@@ -92,18 +134,27 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox> {
                       'Maybe Next time',
                       style: TextStyle(
                         color: Colors.white38,
-                        fontSize: 12,
+                        fontSize: 10,
                       ),
                     ),
                   )
                 ]),
           ),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              color: Colors.white12,
+          Positioned(
+            top: -30,
+            child: Container(
+              width: 60,
+              height: 60,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Text(
+                emoji,
+                style: const TextStyle(
+                  fontSize: 30,
+                ),
+              ),
             ),
           ),
         ],
