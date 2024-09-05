@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_components/components/custom_animated_snackbar.dart';
 
 class CustomAnimatedRatingBox extends StatefulWidget {
   final int starCount;
@@ -8,6 +9,7 @@ class CustomAnimatedRatingBox extends StatefulWidget {
   final Function(double) onRatingChanged;
   String? text;
   VoidCallback? onPress;
+  VoidCallback? submit;
 
   CustomAnimatedRatingBox({
     this.starCount = 5,
@@ -15,6 +17,7 @@ class CustomAnimatedRatingBox extends StatefulWidget {
     required this.onRatingChanged,
     required this.text,
     required this.onPress,
+    required this.submit,
   });
 
   @override
@@ -22,26 +25,13 @@ class CustomAnimatedRatingBox extends StatefulWidget {
       _CustomAnimatedRatingBoxState();
 }
 
-class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
-    with TickerProviderStateMixin {
-  late AnimationController _animationController;
-  late Animation<double> _starAnimation;
-  late Animation<double> _scaleAnimation;
-
+class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox> {
   late double _rating;
   String emoji = '😊';
 
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
-    _starAnimation = Tween<double>(begin: 40, end: 41).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.bounceOut),
-    );
-    _scaleAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
-    );
     _rating = widget.rating;
   }
 
@@ -70,10 +60,6 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
             emoji = '😄',
           ];
       }
-
-      _animationController
-          .forward()
-          .whenComplete(() => _animationController.reverse());
     });
     widget.onRatingChanged(_rating);
   }
@@ -89,7 +75,7 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
         children: [
           Container(
             width: MediaQuery.of(context).size.width - 32,
-            height: 180,
+            height: 220,
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
@@ -98,7 +84,7 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _space(30),
+                  _space(25),
                   SizedBox(
                     width: 280,
                     child: Text(
@@ -110,27 +96,35 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  _space(15),
+                  _space(10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: List.generate(widget.starCount, (index) {
-                      return AnimatedBuilder(
-                        animation: _animationController,
-                        builder: (context, child) {
-                          return GestureDetector(
-                            onTap: () => _handleTap(index),
-                            child: Icon(
-                              index < _rating.floor()
-                                  ? Icons.star_rounded
-                                  : Icons.star_border_purple500_rounded,
-                              color: Colors.white,
-                              size: _starAnimation.value,
-                            ),
-                          );
-                        },
+                      return GestureDetector(
+                        onTap: () => _handleTap(index),
+                        child: Icon(
+                          index < _rating.floor()
+                              ? Icons.star_rounded
+                              : Icons.star_border_purple500_rounded,
+                          color: Colors.white,
+                          size: 40,
+                        ),
                       );
                     }),
                   ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blueAccent,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      onPressed: () {
+                        widget.submit!();
+                      },
+                      child: const Text('Submit')),
+                  _space(8),
                   GestureDetector(
                     onTap: widget.onPress,
                     child: const Text(
@@ -146,7 +140,7 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
           Positioned(
             top: -30,
             child: AnimatedContainer(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               width: 60,
               height: 60,
               alignment: Alignment.center,
@@ -193,6 +187,14 @@ class AnimatedRatingBox {
             onPress: () {
               overlayEntry!.remove();
             },
+            submit: () {
+              overlayEntry!.remove();
+              CustomAnimatedSnackbar.successSnackbar(
+                context,
+                title: 'Rating given',
+                subTitle: 'Thanks for rating our app',
+              );
+            },
             text: 'Give some Rating to developer',
           ),
         );
@@ -213,23 +215,25 @@ class RatingBox extends StatefulWidget {
 
 class _RatingBoxState extends State<RatingBox> {
   @override
-  void initState() {
-    Timer(const Duration(seconds: 3), () {
-      AnimatedRatingBox.ratingBox(context);
-    });
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: Text(
-          'Rating box is Loading...',
-          style: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.w800,
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Rating box is Loading...',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  AnimatedRatingBox.ratingBox(context);
+                },
+                child: Text('Rating Box'))
+          ],
         ),
       ),
     );
