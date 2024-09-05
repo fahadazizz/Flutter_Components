@@ -26,6 +26,7 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
     with TickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _starAnimation;
+  late Animation<double> _scaleAnimation;
 
   late double _rating;
   String emoji = '😊';
@@ -34,9 +35,12 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
   void initState() {
     super.initState();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _starAnimation = Tween<double>(begin: 40, end: 42).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.bounceIn),
+        AnimationController(vsync: this, duration: Duration(milliseconds: 200));
+    _starAnimation = Tween<double>(begin: 40, end: 41).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.bounceOut),
+    );
+    _scaleAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
     _rating = widget.rating;
   }
@@ -59,13 +63,17 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
           ];
         case 4:
           [
-            emoji = '😄',
+            emoji = '😀',
           ];
         case 5:
           [
-            emoji = '😀',
+            emoji = '😄',
           ];
       }
+
+      _animationController
+          .forward()
+          .whenComplete(() => _animationController.reverse());
     });
     widget.onRatingChanged(_rating);
   }
@@ -110,12 +118,7 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
                         animation: _animationController,
                         builder: (context, child) {
                           return GestureDetector(
-                            onTap: () {
-                              _handleTap(index);
-                              _animationController.forward().whenComplete(() {
-                                _animationController.reverse();
-                              });
-                            },
+                            onTap: () => _handleTap(index),
                             child: Icon(
                               index < _rating.floor()
                                   ? Icons.star_rounded
@@ -142,7 +145,8 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
           ),
           Positioned(
             top: -30,
-            child: Container(
+            child: AnimatedContainer(
+              duration: Duration(milliseconds: 300),
               width: 60,
               height: 60,
               alignment: Alignment.center,
@@ -152,7 +156,7 @@ class _CustomAnimatedRatingBoxState extends State<CustomAnimatedRatingBox>
               child: Text(
                 emoji,
                 style: const TextStyle(
-                  fontSize: 30,
+                  fontSize: 35,
                 ),
               ),
             ),
