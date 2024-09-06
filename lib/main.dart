@@ -20,6 +20,7 @@ import 'package:flutter_components/using_custom_package/first_animated_carousel_
 import 'package:provider/provider.dart';
 
 import 'components/custom_circular_progress_indicator.dart';
+import 'components/custom_like_button.dart';
 import 'components/custom_second_bottom_nav_bar.dart';
 
 void main() {
@@ -45,7 +46,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: BottomNavCustomTabView(),
+      home: CustomLikeButton(),
     );
   }
 }
