@@ -41,6 +41,7 @@ dependencies:
   fancy_animated_snackbar: ^0.0.2
   google_fonts: ^6.2.1
   animated_react_button: ^0.0.4
+  svg_flutter: ^0.0.1
 
 dev_dependencies:
   flutter_test:
@@ -67,20 +68,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-    - assets/onBoardLogo.png
-    - assets/onBoardImage.png
-    - assets/Logo.png
-    - assets/linkedin.png
-    - assets/github.png
-    - assets/insta.png
-    - assets/dev.png
-    - assets/mountain.jpg
-    - assets/mountain1.jpg
-    - assets/mountain2.jpg
-    - assets/mountain3.jpg
-    - assets/mountain4.jpg
-    - assets/done.png
-    - assets/travelerImage1.jpg
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
