@@ -10,7 +10,6 @@ import 'package:flutter_components/components/custom_animated_rating_box.dart';
 import 'package:flutter_components/components/custom_animated_slide_button.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/custom_designed_animated_onboard_screen.dart';
-import 'package:flutter_components/components/custom_monasory_grid.dart';
 import 'package:flutter_components/components/custom_otp_field.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/page_navigation_animation.dart';
@@ -18,6 +17,7 @@ import 'package:flutter_components/components/second_animated_onboarding_screen.
 import 'package:flutter_components/components/second_animated_overlay_bottom_navbar.dart';
 import 'package:flutter_components/components/tab_base_navigation.dart';
 import 'package:flutter_components/main_home_page.dart';
+import 'package:flutter_components/pages_design/animated_travel_pages/travel_main_page.dart';
 import 'package:flutter_components/using_custom_package/fancy_animated_snackbar.dart';
 import 'package:flutter_components/using_custom_package/first_animated_carousel_scroll.dart';
 import 'package:provider/provider.dart';
@@ -48,8 +48,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
-      home: SecondAnimatedOnboardingScreen(),
+      theme: ThemeData.light(),
+      home: TravelMainPage(),
     );
   }
 }

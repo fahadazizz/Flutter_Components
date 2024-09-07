@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
 
 class SecondAnimatedOnboardingScreen extends StatefulWidget {
   const SecondAnimatedOnboardingScreen({super.key});
