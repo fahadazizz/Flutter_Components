@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_components/pages_design/animated_travel_pages/components/travel_page_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:svg_flutter/svg.dart';
+
+import 'components/main_page_component/sliding_content_travel_page.dart';
 
 // use light theme in app
 class TravelMainPage extends StatelessWidget {
@@ -35,7 +36,14 @@ class TravelMainPage extends StatelessWidget {
                                     fontWeight: FontWeight.bold,
                                   ),
                         ),
-                        TextButton(onPressed: () {}, child: Text('View more')),
+                        TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'View more',
+                              style: TextStyle(
+                                color: Colors.blueAccent,
+                              ),
+                            )),
                       ],
                     ),
                     SlidingContentTravelPage(),
@@ -106,158 +114,6 @@ class AppBarTravelMainPage extends StatelessWidget {
               color: Colors.black,
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class SlidingContentTravelPage extends StatefulWidget {
-  const SlidingContentTravelPage({super.key});
-
-  @override
-  State<SlidingContentTravelPage> createState() =>
-      _SlidingContentTravelPageState();
-}
-
-class _SlidingContentTravelPageState extends State<SlidingContentTravelPage> {
-  PageController pageController = PageController(viewportFraction: 0.75);
-
-  double pageOffSet = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    pageController.addListener(() {
-      setState(() {
-        pageOffSet = pageController.page!;
-      });
-      debugPrint(pageOffSet.toString());
-    });
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    pageController.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    List<TravelPageModel> _slidingContent = [
-      TravelPageModel(
-        image: 'assets/mountain1.jpg',
-        name: 'Niladri Reservoir',
-        place: 'Tekergat, Sunamgnj',
-        rating: '4.6',
-      ),
-      TravelPageModel(
-        image: 'assets/mountain2.jpg',
-        name: 'Niladri Reservoir',
-        place: 'Tekergat, Sunamgnj',
-        rating: '4.6',
-      ),
-      TravelPageModel(
-        image: 'assets/mountain3.jpg',
-        name: 'Niladri Reservoir',
-        place: 'Tekergat, Sunamgnj',
-        rating: '4.6',
-      ),
-      TravelPageModel(
-        image: 'assets/mountain4.jpg',
-        name: 'Niladri Reservoir',
-        place: 'Tekergat, Sunamgnj',
-        rating: '4.6',
-      ),
-    ];
-    return SizedBox(
-      height: 350,
-      width: double.infinity,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: _slidingContent.length,
-        itemBuilder: (context, index) {
-          return SlidingContentDesign(
-            image: _slidingContent[index].image,
-            name: _slidingContent[index].name,
-            rating: _slidingContent[index].rating,
-            place: _slidingContent[index].place,
-            index: index,
-            offset: pageOffSet,
-          );
-        },
-      ),
-    );
-  }
-}
-
-class SlidingContentDesign extends StatelessWidget {
-  final String? image;
-  final String? name;
-  final String? rating;
-  final String? place;
-  final int index;
-  final double offset;
-
-  SlidingContentDesign({
-    required this.image,
-    required this.name,
-    required this.rating,
-    required this.place,
-    required this.index,
-    required this.offset,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.7, // Increased width
-        child: Column(
-          children: [
-            Expanded(
-              flex: 12,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: Image.asset(
-                  image!,
-                  fit: BoxFit.cover,
-                  alignment: Alignment(-offset + index, 0), // Adjust alignment
-                ),
-              ),
-            ),
-            Expanded(
-              flex: 2,
-              child: Row(
-                children: [
-                  Text(
-                    name!,
-                    style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(),
-                    ),
-                  ),
-                  const Spacer(),
-                  const Icon(
-                    Icons.star,
-                    color: Colors.amber,
-                  ),
-                  Text(rating!),
-                ],
-              ),
-            ),
-            Expanded(
-              flex: 1,
-              child: SizedBox(
-                child: Row(
-                  children: [
-                    Icon(Icons.location_on_outlined),
-                    Text(place!),
-                  ],
-                ),
-              ),
-            ),
-          ],
         ),
       ),
     );
