@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_components/pages_design/animated_travel_pages/components/item_detial_component/content_detial_component.dart';
+import 'package:flutter_components/pages_design/animated_travel_pages/components/item_detial_component/elevated_button_travle_page.dart';
 import 'package:flutter_components/pages_design/animated_travel_pages/components/item_detial_component/iconButton.dart';
 
-class ContentFullSeePage extends StatelessWidget {
+class ContentFullSeePage extends StatefulWidget {
   String? image;
   String? name;
   String? place;
@@ -20,35 +21,85 @@ class ContentFullSeePage extends StatelessWidget {
   });
 
   @override
+  State<ContentFullSeePage> createState() => _ContentFullSeePageState();
+}
+
+class _ContentFullSeePageState extends State<ContentFullSeePage>
+    with TickerProviderStateMixin {
+  late AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 800));
+
+    _animationController.forward();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Stack(
-        children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Image.asset(
-              '$image',
-              fit: BoxFit.cover,
-            ),
-          ),
-          Column(
-            children: [
-              IconButtonDetialPage(),
-              Spacer(),
-              ContentDetailComponent(
-                image: image,
-                name: name,
-                place: place,
-                rating: rating,
-                people: people,
-                description: description,
-              ),
-            ],
-          ),
-        ],
-      )),
+          body: AnimatedBuilder(
+              animation: _animationController,
+              builder: (context, child) {
+                return Stack(
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height,
+                      child: Image.asset(
+                        '${widget.image}',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        IconButtonDetialPage(
+                            animationController: _animationController),
+                        Spacer(),
+                        SlideTransition(
+                          position: Tween<Offset>(
+                                  begin: Offset(0, 1), end: Offset(0, 0))
+                              .animate(
+                            CurvedAnimation(
+                                parent: _animationController,
+                                curve: Curves.easeInOut),
+                          ),
+                          child: Container(
+                            height: 350,
+                            width: double.infinity,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 16),
+                            decoration: const BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(32),
+                                topLeft: Radius.circular(32),
+                              ),
+                            ),
+                            child: Column(
+                              children: [
+                                ContentDetailComponent(
+                                  image: widget.image,
+                                  name: widget.name,
+                                  place: widget.place,
+                                  rating: widget.rating,
+                                  people: widget.people,
+                                  description: widget.description,
+                                ),
+                                Spacer(),
+                                ElevatedButtonTravlePage(),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              })),
     );
   }
 }

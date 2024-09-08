@@ -4,7 +4,8 @@ import 'package:flutter_components/pages_design/animated_travel_pages/content_fu
 import 'package:google_fonts/google_fonts.dart';
 
 class SlidingContentTravelPage extends StatefulWidget {
-  const SlidingContentTravelPage({super.key});
+  AnimationController animationController;
+  SlidingContentTravelPage({required this.animationController});
 
   @override
   State<SlidingContentTravelPage> createState() =>
@@ -69,39 +70,55 @@ class _SlidingContentTravelPageState extends State<SlidingContentTravelPage> {
           description:
               'You will get a complete travel package on the beaches. Packages in the form of airline tickets, recommended Hotel rooms, Transportation, Have you ever been on holiday to the Greek ETC...'),
     ];
-    return SizedBox(
-      height: 400,
-      child: PageView.builder(
-        controller: pageController,
-        itemCount: _slidingContent.length,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ContentFullSeePage(
+    return FadeTransition(
+      opacity: Tween<double>(begin: 0, end: 1).animate(
+        CurvedAnimation(
+            parent: widget.animationController, curve: Curves.easeIn),
+      ),
+      child: SlideTransition(
+        position: Tween<Offset>(begin: Offset(0, 1), end: Offset(0, 0)).animate(
+          CurvedAnimation(
+              parent: widget.animationController, curve: Curves.easeInOut),
+        ),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 400,
+              child: PageView.builder(
+                controller: pageController,
+                itemCount: _slidingContent.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ContentFullSeePage(
+                              image: _slidingContent[index].image,
+                              name: _slidingContent[index].name,
+                              place: _slidingContent[index].place,
+                              rating: _slidingContent[index].rating,
+                              people: _slidingContent[index].people,
+                              description: _slidingContent[index].description),
+                        ),
+                      );
+                    },
+                    child: SlidingContentDesign(
                       image: _slidingContent[index].image,
                       name: _slidingContent[index].name,
-                      place: _slidingContent[index].place,
                       rating: _slidingContent[index].rating,
+                      place: _slidingContent[index].place,
                       people: _slidingContent[index].people,
-                      description: _slidingContent[index].description),
-                ),
-              );
-            },
-            child: SlidingContentDesign(
-              image: _slidingContent[index].image,
-              name: _slidingContent[index].name,
-              rating: _slidingContent[index].rating,
-              place: _slidingContent[index].place,
-              people: _slidingContent[index].people,
-              desc: _slidingContent[index].description,
-              index: index,
-              offset: pageOffSet,
+                      desc: _slidingContent[index].description,
+                      index: index,
+                      offset: pageOffSet,
+                    ),
+                  );
+                },
+              ),
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

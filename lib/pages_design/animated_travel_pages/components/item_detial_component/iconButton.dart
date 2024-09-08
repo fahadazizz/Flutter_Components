@@ -2,37 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class IconButtonDetialPage extends StatelessWidget {
-  const IconButtonDetialPage({super.key});
+  AnimationController animationController;
+  IconButtonDetialPage({required this.animationController});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _iconButton(
-              Icons.arrow_back,
-              () {
-                Navigator.pop(context);
-              },
-            ),
-            Text(
-              'Details',
-              style: GoogleFonts.poppins(
-                  textStyle: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w600,
-              )),
-            ),
-            _iconButton(
-              Icons.bookmark_border_outlined,
-              () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ));
+    return FadeTransition(
+      opacity: Tween<double>(begin: 0, end: 1).animate(
+        CurvedAnimation(parent: animationController, curve: Curves.easeIn),
+      ),
+      child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _iconButton(
+                Icons.arrow_back,
+                () {
+                  Navigator.pop(context);
+                },
+              ),
+              Text(
+                'Details',
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                )),
+              ),
+              _iconButton(
+                Icons.bookmark_border_outlined,
+                () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          )),
+    );
   }
 
   Widget _iconButton(IconData icon, VoidCallback onPress) {

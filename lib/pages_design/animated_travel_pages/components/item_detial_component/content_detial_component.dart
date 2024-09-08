@@ -21,106 +21,97 @@ class ContentDetailComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 350,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topRight: Radius.circular(32),
-          topLeft: Radius.circular(32),
+    return Column(
+      children: [
+        ListTile(
+          title: Text(
+            '$name',
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                fontSize: 22,
+              ),
+            ),
+          ),
+          subtitle: Text(
+            '$place',
+            style: const TextStyle(
+              color: Colors.grey,
+            ),
+          ),
+          trailing: Container(
+            width: 38,
+            height: 38,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(38),
+              color: Color(0xffFFEADF),
+            ),
+            child: SvgPicture.asset(
+              'assets/pages_images/userLogo.svg',
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
-      ),
-      child: Column(
-        children: [
-          ListTile(
-            title: Text(
-              '$name',
-              style: GoogleFonts.poppins(
-                textStyle: const TextStyle(
-                  fontSize: 22,
-                ),
-              ),
-            ),
-            subtitle: Text(
-              '$place',
-              style: const TextStyle(
+        const SizedBox(
+          height: 24,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            children: [
+              Icon(
+                Icons.location_on_outlined,
                 color: Colors.grey,
+                size: 20,
               ),
-            ),
-            trailing: Container(
-              width: 38,
-              height: 38,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(38),
-                color: Color(0xffFFEADF),
-              ),
-              child: SvgPicture.asset(
-                'assets/pages_images/userLogo.svg',
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.location_on_outlined,
+              Text(
+                '$place',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                  fontSize: 12,
                   color: Colors.grey,
-                  size: 20,
-                ),
-                Text(
-                  '$place',
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  )),
-                ),
-                Spacer(),
-                Icon(
-                  Icons.star,
-                  size: 22,
-                  color: Colors.amber,
-                ),
-                Text(
-                  '$rating',
-                  style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  )),
-                ),
-                Spacer(),
-                Text(
-                  '$people',
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.blueAccent,
-                  )),
-                ),
-                Text(
-                  ' /Person',
-                  style: GoogleFonts.poppins(
-                      textStyle: const TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  )),
-                ),
-              ],
-            ),
+                )),
+              ),
+              Spacer(),
+              Icon(
+                Icons.star,
+                size: 22,
+                color: Colors.amber,
+              ),
+              Text(
+                '$rating',
+                style: GoogleFonts.poppins(
+                    textStyle: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                )),
+              ),
+              Spacer(),
+              Text(
+                '$people',
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.blueAccent,
+                )),
+              ),
+              Text(
+                ' /Person',
+                style: GoogleFonts.poppins(
+                    textStyle: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                )),
+              ),
+            ],
           ),
-          const SizedBox(
-            height: 16,
-          ),
-          RichText(
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: RichText(
               text: TextSpan(
             children: [
               TextSpan(
@@ -143,9 +134,9 @@ class ContentDetailComponent extends StatelessWidget {
                 ),
               ),
             ],
-          ))
-        ],
-      ),
+          )),
+        )
+      ],
     );
   }
 }

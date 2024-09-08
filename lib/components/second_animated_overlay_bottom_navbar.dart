@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:fancy_animated_snackbar/fancy_animated_snackbar.dart';
 import 'package:flutter/material.dart';
 
 class SecondAnimatedOverlayBottomNavbar extends StatefulWidget {
@@ -176,21 +175,10 @@ class _SecondAnimatedOverlayBottomNavbarState
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _overlayButton(Icons.inbox, () {
-                              fancyAnimatedSnackbar(context,
-                                  alignment: Alignment.center);
-                            }),
-                            _overlayButton(Icons.settings, () {
-                              fancyAnimatedSnackbar(context);
-                            }),
-                            _overlayButton(Icons.search, () {
-                              fancyAnimatedSnackbar(context,
-                                  alignment: Alignment.topCenter);
-                            }),
-                            _overlayButton(Icons.logout, () {
-                              fancyAnimatedSnackbar(context,
-                                  alignment: Alignment.center);
-                            }),
+                            _overlayButton(Icons.inbox, () {}),
+                            _overlayButton(Icons.settings, () {}),
+                            _overlayButton(Icons.search, () {}),
+                            _overlayButton(Icons.logout, () {}),
                           ],
                         ),
                       ));

@@ -38,7 +38,6 @@ dependencies:
   flutter_onboarding_slider: ^1.0.11
   provider: ^6.1.2
   animated_carousel_scroller: ^0.0.3
-  fancy_animated_snackbar: ^0.0.2
   google_fonts: ^6.2.1
   animated_react_button: ^0.0.4
   svg_flutter: ^0.0.1

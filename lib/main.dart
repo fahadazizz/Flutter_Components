@@ -1,6 +1,5 @@
 // ignore_for_file: unused_import
 
-import 'package:fancy_animated_snackbar/fancy_animated_snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
 import 'package:flutter_components/components/custom_animated_card.dart';

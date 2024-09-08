@@ -1,4 +1,3 @@
-import 'package:fancy_animated_snackbar/fancy_animated_snackbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -210,11 +209,7 @@ class CheckAnimatedSlideButton extends StatelessWidget {
           beforeSlideColor: Colors.white10,
           afterSlideColor: Colors.amber,
           afterSliderBackColor: Colors.amber,
-          onPress: () {
-            fancyAnimatedSnackbar(context,
-                subTitle:
-                    'This is Custom Animated Slide button Developed by Fahad');
-          },
+          onPress: () {},
         ),
       ),
     );
