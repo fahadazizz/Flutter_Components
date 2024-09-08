@@ -39,6 +39,10 @@ class _CustomAnimatedParallelEffectState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Custom Parallel Effect'),
+        centerTitle: true,
+      ),
       body: Center(
         child: SizedBox(
           height: 300,
