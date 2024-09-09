@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_components/components/custom_animated_crousel_scroll.dart';
 import 'package:flutter_components/components/custom_animated_card.dart';
 import 'package:flutter_components/components/custom_animated_dialogbox.dart';
+import 'package:flutter_components/components/custom_animated_image_shile_show.dart';
 import 'package:flutter_components/components/custom_animated_paralele_effect.dart';
 import 'package:flutter_components/components/custom_animated_rating_box.dart';
 import 'package:flutter_components/components/custom_animated_slide_button.dart';
@@ -48,7 +49,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CustomAnimatedParallelEffect(),
+      home: CustomAnimatedImageShileShow(),
     );
   }
 }

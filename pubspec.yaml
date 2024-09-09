@@ -41,6 +41,7 @@ dependencies:
   google_fonts: ^6.2.1
   animated_react_button: ^0.0.4
   svg_flutter: ^0.0.1
+  flutter_image_slideshow: ^0.1.6
 
 dev_dependencies:
   flutter_test:
