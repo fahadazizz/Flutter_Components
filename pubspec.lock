@@ -65,6 +65,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.18.0"
+  control_style:
+    dependency: "direct main"
+    description:
+      name: control_style
+      sha256: "4b27dad0c87a7bce81319676b717c8134996450595b1e5cbb0cebdaa8131492a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.0"
   crypto:
     dependency: transitive
     description:

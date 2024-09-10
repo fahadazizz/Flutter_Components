@@ -22,6 +22,7 @@ import 'package:flutter_components/using_custom_package/fancy_animated_snackbar.
 import 'package:flutter_components/using_custom_package/first_animated_carousel_scroll.dart';
 import 'package:provider/provider.dart';
 
+import 'components/animated_shadow_elevated_button.dart';
 import 'components/custom_circular_progress_indicator.dart';
 import 'components/custom_like_button.dart';
 import 'components/custom_second_bottom_nav_bar.dart';
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CustomAnimatedImageShileShow(),
+      home: AnimatedShadowButton(),
     );
   }
 }
