@@ -11,6 +11,7 @@ import 'package:flutter_components/components/custom_animated_slide_button.dart'
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/custom_designed_animated_onboard_screen.dart';
 import 'package:flutter_components/components/custom_otp_field.dart';
+import 'package:flutter_components/components/custom_rolling_animated_switch.dart';
 import 'package:flutter_components/components/first_contained_bottom_navigation_bar.dart';
 import 'package:flutter_components/components/page_navigation_animation.dart';
 import 'package:flutter_components/components/second_animated_onboarding_screen.dart';
@@ -50,7 +51,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: AnimatedShadowButton(),
+      home: CustomRollingAnimatedSwitch(),
     );
   }
 }

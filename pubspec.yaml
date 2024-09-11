@@ -43,6 +43,7 @@ dependencies:
   svg_flutter: ^0.0.1
   flutter_image_slideshow: ^0.1.6
   control_style: ^0.1.0
+  audioplayers: ^6.1.0
 
 dev_dependencies:
   flutter_test:
