@@ -21,6 +21,7 @@ import 'package:flutter_components/main_home_page.dart';
 import 'package:flutter_components/pages_design/animated_travel_pages/travel_main_page.dart';
 import 'package:flutter_components/using_custom_package/fancy_animated_snackbar.dart';
 import 'package:flutter_components/using_custom_package/first_animated_carousel_scroll.dart';
+import 'package:flutter_components/components/email_validation_form.dart';
 import 'package:provider/provider.dart';
 
 import 'components/animated_shadow_elevated_button.dart';
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: CustomRollingAnimatedSwitch(),
+      home: EmailValidationForm(),
     );
   }
 }
