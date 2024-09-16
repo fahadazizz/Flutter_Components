@@ -7,6 +7,8 @@ import 'package:flutter_components/components/custom_animated_dialogbox.dart';
 import 'package:flutter_components/components/custom_animated_image_shile_show.dart';
 import 'package:flutter_components/components/custom_animated_paralele_effect.dart';
 import 'package:flutter_components/components/custom_animated_rating_box.dart';
+import 'package:flutter_components/components/custom_instagram_like_button.dart';
+import 'package:flutter_components/components/edit_custom_animated_scroll_view.dart';
 import 'package:flutter_components/components/custom_animated_slide_button.dart';
 import 'package:flutter_components/components/custom_animated_snackbar.dart';
 import 'package:flutter_components/components/custom_designed_animated_onboard_screen.dart';
@@ -53,7 +55,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: SecondContaineredBottomBar(),
+      home: CustomInstagramLikeButton(),
     );
   }
 }
